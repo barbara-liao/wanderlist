@@ -10,8 +10,8 @@ CREATE TABLE "users" (
 	"userId" serial NOT NULL,
 	"username" TEXT NOT NULL UNIQUE,
 	"password" TEXT NOT NULL,
-	"createdAt" timestamptz NOT NULL,
-	"modifiedAt" timestamptz NOT NULL,
+	"createdAt" timestamptz(0) NOT NULL default now(),
+	"modifiedAt" timestamptz(0) NOT NULL default now(),
 	CONSTRAINT "users_pk" PRIMARY KEY ("userId")
 ) WITH (
   OIDS=FALSE
@@ -32,7 +32,7 @@ CREATE TABLE "itinerary" (
 	"userRatingsTotal" integer NOT NULL,
 	"userId" serial NOT NULL,
 	"dayId" bigint NOT NULL,
-	CONSTRAINT "Itinerary_pk" PRIMARY KEY ("itineraryId")
+	CONSTRAINT "itinerary_pk" PRIMARY KEY ("itineraryId")
 ) WITH (
   OIDS=FALSE
 );
@@ -65,8 +65,8 @@ CREATE TABLE "day" (
 
 
 
-ALTER TABLE "Itinerary" ADD CONSTRAINT "Itinerary_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
-ALTER TABLE "Itinerary" ADD CONSTRAINT "Itinerary_fk1" FOREIGN KEY ("dayId") REFERENCES "day"("dayId");
+ALTER TABLE "itinerary" ADD CONSTRAINT "itinerary_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
+ALTER TABLE "itinerary" ADD CONSTRAINT "itinerary_fk1" FOREIGN KEY ("dayId") REFERENCES "day"("dayId");
 
 ALTER TABLE "trip" ADD CONSTRAINT "trip_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 
