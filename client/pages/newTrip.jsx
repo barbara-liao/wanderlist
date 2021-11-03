@@ -28,7 +28,7 @@ export default class NewTrip extends React.Component {
       const iconId = event.target.id;
       const iconUrl = `icons/icon-${iconId}.svg`;
       this.setState({
-        imageSrc: iconUrl
+        icon: iconUrl
       });
     } else if (event.target.id === 'select-icon-button') {
       this.setState({ modalOpen: false });
@@ -37,6 +37,7 @@ export default class NewTrip extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const form = event.target;
     const req = {
       method: 'POST',
       headers: {
@@ -47,25 +48,15 @@ export default class NewTrip extends React.Component {
     fetch('api/trip', req)
       .then(res => res.json())
       .then(result => {
-        // window.location.hash = 'my-trips';
+        this.setState({
+          modalOpen: false,
+          icon: 'icons/icon-placeholder.svg',
+          destination: '',
+          startDate: '',
+          endDate: ''
+        });
       });
-    // const { action } = this.props;
-    // const req = {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(this.state)
-    // };
-    // fetch(`/api/auth/${action}`, req)
-    //   .then(res => res.json())
-    //   .then(result => {
-    //     if (action === 'sign-up') {
-    //       window.location.hash = 'sign-in';
-    //     } else if (result.user && result.token) {
-    //       this.props.onSignIn(result);
-    //     }
-    //   });
+    form.reset();
   }
 
   render() {
@@ -116,7 +107,7 @@ export default class NewTrip extends React.Component {
                     type="date"
                     name="startDate"
                     onChange={this.handleChange}
-                    className="date-picker input poppins">
+                    className="input poppins">
                     </input>
                   </div>
                 </div>
@@ -133,7 +124,7 @@ export default class NewTrip extends React.Component {
                       type="date"
                       name="endDate"
                       onChange={this.handleChange}
-                      className="date-picker input poppins">
+                      className="input poppins">
                     </input>
                   </div>
                 </div>
@@ -152,25 +143,22 @@ export default class NewTrip extends React.Component {
       return (
         <>
           <div className="icon-modal margin-auto">
-            <div className="row justify-space-between">
+            <div className="row justify-space-between flex-wrap">
               <a><img id="barn" className="icon" onClick={this.handleClick} src="icons/icon-barn.svg"></img></a>
               <a><img id="bay" className="icon" onClick={this.handleClick} src="icons/icon-bay.svg"></img></a>
               <a><img id="beach" className="icon" onClick={this.handleClick} src="icons/icon-beach.svg"></img></a>
               <a><img id="camp" className="icon" onClick={this.handleClick} src="icons/icon-camp.svg"></img></a>
-            </div>
-            <div className="row justify-space-between">
+
               <a><img id="canyon" className="icon" onClick={this.handleClick} src="icons/icon-canyon.svg"></img></a>
               <a><img id="city" className="icon" onClick={this.handleClick} src="icons/icon-city.svg"></img></a>
               <a><img id="country" className="icon" onClick={this.handleClick} src="icons/icon-country.svg"></img></a>
               <a><img id="desert" className="icon" onClick={this.handleClick} src="icons/icon-desert.svg"></img></a>
-            </div>
-            <div className="row justify-space-between">
+
               <a><img id="industrial" className="icon" onClick={this.handleClick} src="icons/icon-industrial.svg"></img></a>
               <a><img id="lake" className="icon" onClick={this.handleClick} src="icons/icon-lake.svg"></img></a>
               <a><img id="lighthouse" className="icon" onClick={this.handleClick} src="icons/icon-lighthouse.svg"></img></a>
               <a><img id="mountain-lake" className="icon" onClick={this.handleClick} src="icons/icon-mountain-lake.svg"></img></a>
-            </div>
-            <div className="row justify-space-between">
+
               <a><img id="mountain" className="icon" onClick={this.handleClick} src="icons/icon-mountain.svg"></img></a>
               <a><img id="night-lake" className="icon" onClick={this.handleClick} src="icons/icon-night-lake.svg"></img></a>
               <a><img id="plateau" className="icon" onClick={this.handleClick} src="icons/icon-plateau.svg"></img></a>
@@ -205,7 +193,7 @@ export default class NewTrip extends React.Component {
                         type="text"
                         name="destination"
                         placeholder="e.g. Paris, Japan..."
-                        // onChange={handleChange}
+                        onChange={this.handleChange}
                         className="input poppins">
                       </input>
                     </div>
@@ -222,8 +210,8 @@ export default class NewTrip extends React.Component {
                         id="startDate"
                         type="date"
                         name="startDate"
-                        // onChange={handleChange}
-                        className="date-picker input poppins">
+                        onChange={this.handleChange}
+                        className="input poppins">
                       </input>
                     </div>
                   </div>
@@ -239,8 +227,8 @@ export default class NewTrip extends React.Component {
                         id="endDate"
                         type="date"
                         name="endDate"
-                        // onChange={handleChange}
-                        className="date-picker input poppins">
+                        onChange={this.handleChange}
+                        className="input poppins">
                       </input>
                     </div>
                   </div>

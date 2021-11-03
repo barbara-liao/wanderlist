@@ -40,6 +40,7 @@ body {
   border-radius: 5px;
   margin: 5px;
   font-size: 0.85rem;
+  cursor: pointer;
 }
 
 .icon-image {
@@ -71,12 +72,29 @@ body {
   height: 2.3rem;
   font-size: 0.9rem;
   border: none;
+  cursor: pointer;
+}
+
+.icon-modal {
+  height: 460px;
+  width: 500px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 25px;
 }
 
 .icon {
   width: 80px;
   height: 80px;
   cursor: pointer;
+  border-radius: 50%;
+  margin: 2px 5px;
 }
 
 .select-icon {
@@ -87,4 +105,17 @@ body {
   border: none;
   border-radius: 3px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 576px) {
+  .icon-modal {
+    height: 610px;
+    width: 345px;
+    padding: 20px 10px;
+  }
+
+  .icon {
+    width: 80px;
+    height: 80px;
+  }
 }
