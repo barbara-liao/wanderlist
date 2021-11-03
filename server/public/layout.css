@@ -1,0 +1,63 @@
+.container {
+  width: 60%;
+  height: 100%;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.column-half {
+  flex-basis: 50%;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.plan-button-margin {
+  margin: 2rem;
+}
+
+.select-icon-margin {
+  margin: 1rem 0 0;
+}
+
+.icon-modal {
+  height: 450px;
+  width: 500px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 35px;
+}

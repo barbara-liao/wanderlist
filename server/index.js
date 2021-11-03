@@ -23,7 +23,7 @@ app.use(jsonMiddleware);
 app.post('/api/trip', (req, res, next) => {
   const { destination, startDate, endDate, icon } = req.body;
   if (!destination || !startDate || !endDate || !icon) {
-    throw new ClientError(400, 'destination, startdate, endate and icon are required fields');
+    throw new ClientError(400, 'destination, startdate, enddate and icon are required fields');
   }
   const sql = `
   insert into "trip" ("destination", "startDate", "endDate", "icon", "userId")
@@ -35,7 +35,6 @@ app.post('/api/trip', (req, res, next) => {
   db.query(sql, params)
     .then(result => {
       const newTrip = result.rows[0];
-      // console.log(newTrip);
       res.status(201).json(newTrip);
     })
     .catch(err => next(err));
