@@ -20,6 +20,16 @@ app.use(staticMiddleware);
 
 app.use(jsonMiddleware);
 
+app.get('/api/trip', (req, res, next) => {
+  const sql = `
+  select *
+  from "trip"
+  order by "startDate"`;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => { next(err); });
+});
+
 app.post('/api/trip', (req, res, next) => {
   const { destination, startDate, endDate, icon } = req.body;
   if (!destination || !startDate || !endDate || !icon) {

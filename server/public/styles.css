@@ -107,6 +107,10 @@ body {
   cursor: pointer;
 }
 
+.trip-list {
+  margin: 5px 0;
+}
+
 @media screen and (max-width: 576px) {
   .icon-modal {
     height: 610px;
