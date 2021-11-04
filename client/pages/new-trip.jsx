@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from './navbar';
 
 export default class NewTrip extends React.Component {
   constructor(props) {
@@ -53,6 +52,7 @@ export default class NewTrip extends React.Component {
     fetch('api/trip', req)
       .then(res => res.json())
       .then(result => {
+        window.location.hash = '#trips';
         this.setState({
           modalOpen: false,
           selectedIcon: 'icons/icon-placeholder.svg',
@@ -70,7 +70,6 @@ export default class NewTrip extends React.Component {
     return (
       <>
         <IconPicker open={this.state} onClick={this.handleClick} />
-        <Navbar />
         <form onSubmit={this.handleSubmit}>
           <div className="column">
             <div className="row justify-center align-center">
@@ -135,9 +134,12 @@ export default class NewTrip extends React.Component {
                   </div>
                 </div>
                 <div className="flex justify-center plan-button-margin">
-                  <button id="start-planning" type="submit" className="plan-button poppins">
-                    Start Planning
-                  </button>
+                    <button
+                    id="start-planning"
+                    type="submit"
+                    className="plan-button poppins">
+                      Start Planning
+                    </button>
                 </div>
               </div>
             </div>

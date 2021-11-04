@@ -67,8 +67,19 @@ body {
 .plan-button {
   background-color: #e3913f;
   color: white;
-  border-radius: 15px;
+  border-radius: 10px;
   width: 10rem;
+  height: 2.3rem;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+}
+
+.new-trip-button {
+  background-color: #e3913f;
+  color: white;
+  border-radius: 10px;
+  width: 7rem;
   height: 2.3rem;
   font-size: 0.9rem;
   border: none;
@@ -107,6 +118,10 @@ body {
   cursor: pointer;
 }
 
+.trip-list {
+  margin: 5px 0;
+}
+
 @media screen and (max-width: 576px) {
   .icon-modal {
     height: 610px;
@@ -117,5 +132,18 @@ body {
   .icon {
     width: 80px;
     height: 80px;
+  }
+
+  .icon-image {
+    height: 60px;
+    width: 60px;
+  }
+
+  .destination {
+    font-size: 0.9rem;
+  }
+
+  .date-range {
+    font-size: 0.8rem;
   }
 }
