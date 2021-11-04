@@ -1,0 +1,59 @@
+.container {
+  width: 60%;
+  height: 100%;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.column-half {
+  flex-basis: 50%;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.plan-button-margin {
+  margin: 2rem;
+}
+
+.select-icon-margin {
+  margin: 1rem 0 0;
+}
+
+@media screen and (max-width: 576px) {
+  .select-icon-margin {
+    margin: 0;
+  }
+}
