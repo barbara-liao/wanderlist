@@ -1,5 +1,4 @@
 import React from 'react';
-// import NewTrip from './new-trip';
 import TripList from '../components/trip-list';
 
 export default class ViewTrips extends React.Component {
