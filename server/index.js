@@ -22,7 +22,12 @@ app.use(jsonMiddleware);
 
 app.get('/api/trip', (req, res, next) => {
   const sql = `
-  select *
+  select "destination",
+         "endDate",
+         "icon",
+         "startDate",
+         "tripId",
+         "userId"
   from "trip"
   order by "startDate"`;
   db.query(sql)
