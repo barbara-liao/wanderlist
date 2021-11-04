@@ -86,7 +86,35 @@
 }
 
 @media screen and (max-width: 576px) {
+  .container {
+    width: 100%;
+  }
+
+  .body-container {
+    width: 90%;
+  }
+
+  .list-container {
+    height: 6rem;
+  }
+
+  .col-one-third {
+    flex-basis: 25%;
+  }
+
+  .col-two-third {
+    flex-basis: 75%;
+  }
+
   .select-icon-margin {
     margin: 0;
+  }
+
+  .header-margin {
+    margin: 1rem 0;
+  }
+
+  .trip-list-padding {
+    padding: 0 0 0 5px;
   }
 }

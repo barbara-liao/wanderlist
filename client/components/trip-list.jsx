@@ -11,10 +11,10 @@ function Trip(props) {
           <img className="icon-image" src={icon}></img>
         </div>
         <div className="col-two-third flex flex-column justify-center trip-list-padding">
-          <div className="row">
+          <div className="row destination">
             <h3 className="trip-list">Trip to {destination}</h3>
           </div>
-          <div className="row">
+          <div className="row date-range">
             <p className="trip-list">{start} - {end}</p>
           </div>
         </div>
