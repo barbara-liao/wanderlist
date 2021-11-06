@@ -6,7 +6,7 @@ function Day(props) {
   return (
     <>
       <div className="row flex-column day-margin">
-        <h3 className="margin-none">{date.date}</h3>
+        <h3 className="margin-none day-font">{date.dayNum}: {date.date}</h3>
         <hr className="margin-none flex align-center"></hr>
         <p className="margin-none weather-font">Weather Forecast: 84°F / 74°F</p>
       </div>

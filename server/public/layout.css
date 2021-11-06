@@ -129,6 +129,14 @@
     height: 6rem;
   }
 
+  .header-container {
+    width: 90%;
+  }
+
+  .itinerary-container {
+    width: 90%;
+  }
+
   .col-one-third {
     flex-basis: 25%;
   }
@@ -147,5 +155,9 @@
 
   .trip-list-padding {
     padding: 0 0 0 5px;
+  }
+
+  .title-margin {
+    margin: 0.2rem 0;
   }
 }

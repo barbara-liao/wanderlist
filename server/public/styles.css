@@ -166,4 +166,12 @@ hr {
   .date-range {
     font-size: 0.8rem;
   }
+
+  .day-font {
+    font-size: 1.1rem;
+  }
+
+  .weather-font {
+    font-size: 0.8rem;
+  }
 }

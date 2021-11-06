@@ -8,7 +8,10 @@ export default function getRange(start, end) {
 
   for (let i = 0; i < numDates + 1; i++) {
     const parsedDate = parseDate(startDay);
-    const dateObj = { date: parsedDate };
+    const dateObj = {
+      dayNum: `Day ${i + 1}`,
+      date: parsedDate
+    };
     dateArr.push(dateObj);
     startDay.setDate(startDay.getDate() + 1);
   }
