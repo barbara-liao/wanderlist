@@ -5,7 +5,8 @@ export default class ViewTrips extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      trips: []
+      trips: [],
+      tripId: null
     };
   }
 
@@ -22,7 +23,7 @@ export default class ViewTrips extends React.Component {
 
   render() {
     return (
-      <TripList trips={this.state.trips} />
+      <TripList onClick={this.handleClick} trips={this.state.trips} />
     );
   }
 }

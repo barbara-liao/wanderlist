@@ -17,8 +17,27 @@
   box-shadow: 1px 1px 4px gray;
 }
 
+.day-container {
+  width: 90%;
+  margin: auto;
+}
+
+.header-container {
+  width: 43%;
+  margin: auto;
+}
+
+.itinerary-container {
+  width: 41%;
+  margin: auto;
+}
+
 .row {
   display: flex;
+}
+
+.col-half {
+  flex-basis: 50%;
 }
 
 .col-one-third {
@@ -85,6 +104,18 @@
   margin: 2rem 0;
 }
 
+.title-margin {
+  margin: 0.4rem 0;
+}
+
+.margin-none {
+  margin: 0;
+}
+
+.day-margin {
+  margin: 15px 0;
+}
+
 @media screen and (max-width: 576px) {
   .container {
     width: 100%;
@@ -96,6 +127,14 @@
 
   .list-container {
     height: 6rem;
+  }
+
+  .header-container {
+    width: 90%;
+  }
+
+  .itinerary-container {
+    width: 90%;
   }
 
   .col-one-third {
@@ -116,5 +155,9 @@
 
   .trip-list-padding {
     padding: 0 0 0 5px;
+  }
+
+  .title-margin {
+    margin: 0.2rem 0;
   }
 }

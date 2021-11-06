@@ -1,9 +1,15 @@
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 body {
   font-family: Poppins, sans-serif;
+}
+
+hr {
+  border-top: 1px solid #dadada;
+  width: 100%;
 }
 
 .poppins {
@@ -122,6 +128,20 @@ body {
   margin: 5px 0;
 }
 
+.trip-to-font {
+  font-size: 0.9rem;
+  color: gray;
+}
+
+.weather-font {
+  font-size: 0.85rem;
+  color: gray;
+}
+
+.color-black {
+  color: black;
+}
+
 @media screen and (max-width: 576px) {
   .icon-modal {
     height: 610px;
@@ -144,6 +164,14 @@ body {
   }
 
   .date-range {
+    font-size: 0.8rem;
+  }
+
+  .day-font {
+    font-size: 1.1rem;
+  }
+
+  .weather-font {
     font-size: 0.8rem;
   }
 }
