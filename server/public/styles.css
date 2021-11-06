@@ -65,6 +65,14 @@ hr {
   padding: 0 8px;
 }
 
+.itinerary-input {
+  width: 25rem;
+  height: 1.8rem;
+  border-radius: 3px;
+  border: 1px solid gray;
+  padding: 0 8px;
+}
+
 .form-label {
   margin: 1rem 0 0;
   font-size: 0.8rem;
@@ -87,6 +95,28 @@ hr {
   border-radius: 10px;
   width: 7rem;
   height: 2.3rem;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+}
+
+.add-save-button {
+  background-color: #e3913f;
+  color: white;
+  border-radius: 3px;
+  width: 50px;
+  height: 30px;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #e3913f;
+  color: white;
+  border-radius: 3px;
+  width: 80px;
+  height: 30px;
   font-size: 0.9rem;
   border: none;
   cursor: pointer;
