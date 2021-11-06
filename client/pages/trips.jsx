@@ -8,7 +8,6 @@ export default class ViewTrips extends React.Component {
       trips: [],
       tripId: null
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {

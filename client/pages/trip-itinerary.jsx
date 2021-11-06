@@ -18,20 +18,6 @@ export default class TripItinerary extends React.Component {
         this.setState({ trip });
       })
       .catch(err => console.error('Error: ', err));
-
-  }
-
-  componentDidUpdate() {
-    if (!this.state.hasFetched) {
-      fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=${this.state.trip.destination}&key=1a09f21e5bf940b98fe47a1430a6f5d7`)
-        .then(response => response.json())
-        .then(weather => {
-          this.setState({ weather, hasFetched: true });
-        })
-        .catch(err => console.error(err));
-      return true;
-    }
-    return false;
   }
 
   render() {
@@ -46,7 +32,7 @@ export default class TripItinerary extends React.Component {
             </div>
           </div>
         </div>
-        <ItineraryList trips={this.state.trip} />
+        <ItineraryList trips={this.state} />
       </>
     );
   }

@@ -15,7 +15,7 @@ function Day(props) {
 }
 
 function ItineraryList(props) {
-  const { startDate, endDate } = props.trips;
+  const { startDate, endDate } = props.trips.trip;
   const dates = getRange(startDate, endDate);
 
   return (
