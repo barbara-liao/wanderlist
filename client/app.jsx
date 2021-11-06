@@ -3,6 +3,7 @@ import NewTrip from './pages/new-trip';
 import parseRoute from './lib/parse-route';
 import Navbar from './components/navbar';
 import ViewTrips from './pages/trips';
+import TripItinerary from './pages/trip-itinerary';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -26,6 +27,9 @@ export default class App extends React.Component {
       return <NewTrip />;
     } else if (route.path === 'trips') {
       return <ViewTrips />;
+    } else if (route.path === 'trip-itinerary') {
+      const tripId = route.params.get('tripId');
+      return <TripItinerary tripId={tripId} />;
     }
   }
 

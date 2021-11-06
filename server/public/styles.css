@@ -1,9 +1,15 @@
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 body {
   font-family: Poppins, sans-serif;
+}
+
+hr {
+  border-top: 1px solid #dadada;
+  width: 100%;
 }
 
 .poppins {
@@ -120,6 +126,20 @@ body {
 
 .trip-list {
   margin: 5px 0;
+}
+
+.trip-to-font {
+  font-size: 0.9rem;
+  color: gray;
+}
+
+.weather-font {
+  font-size: 0.85rem;
+  color: gray;
+}
+
+.color-black {
+  color: black;
 }
 
 @media screen and (max-width: 576px) {

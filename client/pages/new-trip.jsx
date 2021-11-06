@@ -62,6 +62,7 @@ export default class NewTrip extends React.Component {
           endDate: ''
         });
       });
+
     form.reset();
   }
 
