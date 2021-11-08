@@ -39,16 +39,6 @@ hr {
   margin: 2.5rem 0 1rem;
 }
 
-.icon-button {
-  background-color: #76b3b5;
-  padding: 5px 25px;
-  color: white;
-  border-radius: 5px;
-  margin: 5px;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-
 .icon-image {
   margin: 5px;
   height: 75px;
@@ -76,6 +66,16 @@ hr {
 .form-label {
   margin: 1rem 0 0;
   font-size: 0.8rem;
+}
+
+.icon-button {
+  background-color: #76b3b5;
+  padding: 5px 25px;
+  color: white;
+  border-radius: 5px;
+  margin: 5px;
+  font-size: 0.85rem;
+  cursor: pointer;
 }
 
 .plan-button {
@@ -120,6 +120,14 @@ hr {
   font-size: 0.9rem;
   border: none;
   cursor: pointer;
+}
+
+.add-edit-button {
+  background-color: #e3913f;
+  color: white;
+  padding: 6px 13px;
+  border-radius: 50%;
+  font-size: 1.5rem;
 }
 
 .icon-modal {

@@ -9,9 +9,23 @@ export default class ItineraryForm extends React.Component {
     };
   }
 
+  handleSubmit() {
+    event.preventDefault();
+    // console.log('hello!');
+  }
+
   render() {
     return (
-      <Itinerary />
+      <div className="body-container">
+        <div className="row">
+          <h3 className="header-margin">Add a Place</h3>
+        </div>
+        <div className="flex justify-center">
+          <form onSubmit={this.handleSubmit}>
+            <Itinerary tripId={this.props.tripId}/>
+          </form>
+        </div>
+      </div>
     );
   }
 }

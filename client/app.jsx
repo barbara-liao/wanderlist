@@ -32,7 +32,8 @@ export default class App extends React.Component {
       const tripId = route.params.get('tripId');
       return <TripItinerary tripId={tripId} />;
     } else if (route.path === 'add-edit-trip') {
-      return <ItineraryForm />;
+      const tripId = route.params.get('tripId');
+      return <ItineraryForm tripId={tripId}/>;
     }
   }
 
