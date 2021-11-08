@@ -5,13 +5,22 @@ export default class ItineraryForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      search: '',
+      date: '',
+      startTime: '',
+      endTime: '',
+      address: '',
+      placeId: '',
+      details: []
     };
   }
 
   handleSubmit() {
     event.preventDefault();
-    // console.log('hello!');
+
+    // };
+
+    // fetch('api/');
   }
 
   render() {

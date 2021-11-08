@@ -1,23 +1,11 @@
 import React, { Component } from 'react';
 import { GoogleApiWrapper } from 'google-maps-react';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng
-} from 'react-places-autocomplete';
+import PlacesAutocomplete from 'react-places-autocomplete';
 
 export class Autocomplete extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      address: '',
-      placeId: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
-  }
-
-  handleChange(address) {
-    this.setState({ address });
   }
 
   handleSelect(address, placeId) {
@@ -25,12 +13,6 @@ export class Autocomplete extends Component {
       address,
       placeId
     });
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => {
-        this.setState({ mapCenter: latLng });
-      })
-      .catch(error => console.error('Error', error));
   }
 
   render() {
@@ -41,10 +23,11 @@ export class Autocomplete extends Component {
     return (
       <>
         <PlacesAutocomplete
-          value={this.state.address}
-          onChange={this.handleChange}
-          onSelect={this.handleSelect}
+          value={this.props.address}
+          onChange={this.props.onChange}
+          onSelect={this.props.onSelect}
           style={{ position: 'relative' }}
+          name="address"
         >
           {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
             <div>

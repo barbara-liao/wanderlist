@@ -1,47 +1,39 @@
 import React from 'react';
 import Autocomplete from './autocomplete';
+import { GoogleApiWrapper } from 'google-maps-react';
+// import { geocodeByPlaceId } from 'react-places-autocomplete';
 
-export default class Itinerary extends React.Component {
+export class Itinerary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: '',
       date: '',
       startTime: '',
       endTime: '',
+      address: '',
+      placeId: '',
       details: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handleAutocompleteChange = this.handleAutocompleteChange.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
     // console.log('hello');
 
-    const search = this.state.search.replaceAll(' ', '%20');
-    // console.log(search);
-
-    fetch(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json
-    ?input=${search}
-    &inputtype=textquery
-    &fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry%2Cplace_id%2Cuser_ratings_total
-    &key=AIzaSyADlDyACi5WP6xynptx0Au3ZXC1xhzBTRg`)
-      .then(res => res.json())
-      .then(result => {
-        this.setState({
-          details: result
-        });
-      });
     // const form = event.target;
-    // const reqPost = {
+    // console.log(form);
+    // const req = {
     //   method: 'POST',
     //   headers: {
     //     'Content-Type': 'application/json'
     //   },
     //   body: JSON.stringify(this.state)
     // };
-    // fetch('api/trip', reqPost)
+    // fetch('api/itinerary', req)
     //   .then(res => res.json())
     //   .then(result => {
     //     window.location.hash = '#trips';
@@ -58,9 +50,20 @@ export default class Itinerary extends React.Component {
     // form.reset();
   }
 
-  handleChange() {
+  handleSelect(address, placeId) {
+    this.setState({
+      address,
+      placeId
+    });
+  }
+
+  handleChange(event) {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+  }
+
+  handleAutocompleteChange(event) {
+    this.setState({ address: event });
   }
 
   render() {
@@ -71,7 +74,7 @@ export default class Itinerary extends React.Component {
           <label htmlFor="destination">
             Search Places
           </label>
-          <Autocomplete />
+          <Autocomplete onChange={this.handleAutocompleteChange} onSelect={this.handleSelect} name="address" address={this.state.address} />
         </div>
         <div className="row flex-column day-margin">
           <label htmlFor="destination">
@@ -120,3 +123,7 @@ export default class Itinerary extends React.Component {
     );
   }
 }
+
+export default GoogleApiWrapper({
+  apiKey: ('AIzaSyADlDyACi5WP6xynptx0Au3ZXC1xhzBTRg')
+})(Itinerary);
