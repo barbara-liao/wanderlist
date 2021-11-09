@@ -7,6 +7,7 @@ export default class TripItinerary extends React.Component {
     this.state = {
       weather: null,
       trip: null,
+      itineraries: null,
       tripId: this.props.tripId
     };
   }
@@ -16,6 +17,13 @@ export default class TripItinerary extends React.Component {
       .then(response => response.json())
       .then(trip => {
         this.setState({ trip });
+      })
+      .catch(err => console.error('Error: ', err));
+
+    fetch(`api/itinerary/${this.props.tripId}`)
+      .then(response => response.json())
+      .then(itineraries => {
+        this.setState({ itineraries });
       })
       .catch(err => console.error('Error: ', err));
   }

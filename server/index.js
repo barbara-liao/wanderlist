@@ -62,6 +62,28 @@ app.get('/api/trip/:tripId', (req, res, next) => {
     });
 });
 
+app.get('/api/itinerary/:tripId', (req, res, next) => {
+  const tripId = parseInt(req.params.tripId, 10);
+  if (!tripId) {
+    throw new ClientError(400, 'tripId must be a positive integer');
+  }
+  const sql = `
+  select *
+  from "itinerary"
+  where "tripId" = $1
+  order by "timeStart"`;
+
+  const params = [tripId];
+
+  db.query(sql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(404, `cannot find trip with tripId ${tripId}`);
+      }
+      res.json(result.rows);
+    });
+});
+
 app.post('/api/trip', (req, res, next) => {
   const { destination, startDate, endDate, icon } = req.body;
   if (!destination || !startDate || !endDate || !icon) {
@@ -90,8 +112,7 @@ app.post('/api/itinerary', (req, res, next) => {
   const sql = `
   insert into "itinerary" ("address", "date", "hours", "name", "userRatingsTotal", "phoneNumber", "placeId", "rating", "timeEnd", "timeStart", "tripId", "website", "userId")
   values ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
-  returning *
-  `;
+  returning *`;
 
   const params = [adrAddress, date, hours, name, numOfRatings, phoneNum, placeId, rating, endTime, startTime, tripId, website, 1];
 

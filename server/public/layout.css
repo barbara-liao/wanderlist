@@ -23,12 +23,20 @@
 }
 
 .header-container {
-  width: 43%;
+  width: 38%;
   margin: auto;
 }
 
 .itinerary-container {
-  width: 41%;
+  width: 35%;
+  margin: auto;
+}
+
+.itinerary-card {
+  height: 8rem;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  width: 95%;
   margin: auto;
 }
 
@@ -46,6 +54,14 @@
 
 .col-two-third {
   flex-basis: calc(100% / 3 * 2);
+}
+
+.col-one-tenth {
+  flex-basis: 10%;
+}
+
+.col-nine-tenth {
+  flex-basis: 90%;
 }
 
 .flex {
@@ -84,20 +100,12 @@
   margin: auto;
 }
 
-.container-padding {
-  padding: 1rem;
-}
-
 .plan-button-margin {
   margin: 2rem;
 }
 
 .select-icon-margin {
   margin: 1rem 0 0;
-}
-
-.trip-list-padding {
-  padding: 0 0 0 20px;
 }
 
 .header-margin {
@@ -116,8 +124,28 @@
   margin: 15px 0;
 }
 
+.itinerary-margin {
+  margin: 3px 0;
+}
+
+.bottom-margin {
+  margin-bottom: 5px;
+}
+
 .position-absolute {
   position: absolute;
+}
+
+.container-padding {
+  padding: 1rem;
+}
+
+.trip-list-padding {
+  padding: 0 0 0 20px;
+}
+
+.padding-left {
+  padding-left: 4rem;
 }
 
 @media screen and (max-width: 576px) {

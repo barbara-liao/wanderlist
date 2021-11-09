@@ -125,9 +125,9 @@ hr {
 .add-edit-button {
   background-color: #e3913f;
   color: white;
-  padding: 6px 13px;
+  padding: 5.6px 13px;
   border-radius: 50%;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .icon-modal {
@@ -167,13 +167,17 @@ hr {
 }
 
 .trip-to-font {
-  font-size: 0.9rem;
-  color: gray;
+  font-size: 1rem;
+  color: rgb(92 92 92);
 }
 
 .weather-font {
   font-size: 0.85rem;
   color: gray;
+}
+
+.itinerary-font {
+  font-size: 0.85rem;
 }
 
 .color-black {
@@ -211,5 +215,10 @@ hr {
 
   .weather-font {
     font-size: 0.8rem;
+  }
+
+  .add-edit-button {
+    padding: 6px 13px;
+    font-size: 1.5rem;
   }
 }
