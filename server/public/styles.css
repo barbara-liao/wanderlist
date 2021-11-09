@@ -39,16 +39,6 @@ hr {
   margin: 2.5rem 0 1rem;
 }
 
-.icon-button {
-  background-color: #76b3b5;
-  padding: 5px 25px;
-  color: white;
-  border-radius: 5px;
-  margin: 5px;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-
 .icon-image {
   margin: 5px;
   height: 75px;
@@ -65,9 +55,27 @@ hr {
   padding: 0 8px;
 }
 
+.itinerary-input {
+  width: 25rem;
+  height: 1.8rem;
+  border-radius: 3px;
+  border: 1px solid gray;
+  padding: 0 8px;
+}
+
 .form-label {
   margin: 1rem 0 0;
   font-size: 0.8rem;
+}
+
+.icon-button {
+  background-color: #76b3b5;
+  padding: 5px 25px;
+  color: white;
+  border-radius: 5px;
+  margin: 5px;
+  font-size: 0.85rem;
+  cursor: pointer;
 }
 
 .plan-button {
@@ -90,6 +98,36 @@ hr {
   font-size: 0.9rem;
   border: none;
   cursor: pointer;
+}
+
+.add-save-button {
+  background-color: #e3913f;
+  color: white;
+  border-radius: 3px;
+  width: 50px;
+  height: 30px;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #e3913f;
+  color: white;
+  border-radius: 3px;
+  width: 80px;
+  height: 30px;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+}
+
+.add-edit-button {
+  background-color: #e3913f;
+  color: white;
+  padding: 5.6px 13px;
+  border-radius: 50%;
+  font-size: 1.3rem;
 }
 
 .icon-modal {
@@ -129,13 +167,17 @@ hr {
 }
 
 .trip-to-font {
-  font-size: 0.9rem;
-  color: gray;
+  font-size: 1rem;
+  color: rgb(92 92 92);
 }
 
 .weather-font {
   font-size: 0.85rem;
   color: gray;
+}
+
+.itinerary-font {
+  font-size: 0.85rem;
 }
 
 .color-black {
@@ -173,5 +215,18 @@ hr {
 
   .weather-font {
     font-size: 0.8rem;
+  }
+
+  .add-edit-button {
+    padding: 6px 13px;
+    font-size: 1.5rem;
+  }
+
+  .itinerary-input {
+    width: 20rem;
+  }
+
+  .itinerary-font {
+    font-size: 0.75rem;
   }
 }

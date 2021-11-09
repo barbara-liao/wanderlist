@@ -26,13 +26,15 @@ CREATE TABLE "itinerary" (
 	"timeStart" TIME NOT NULL,
 	"timeEnd" TIME NOT NULL,
 	"website" TEXT,
-	"phoneNumber" TEXT NOT NULL,
+	"phoneNumber" TEXT,
 	"notes" TEXT,
 	"rating" numeric,
-	"userRatingsTotal" integer NOT NULL,
+	"userRatingsTotal" integer,
 	"userId" serial NOT NULL,
 	"date" DATE NOT NULL,
 	"tripId" integer NOT NULL,
+  "hours" TEXT,
+  "placeId" TEXT NOT NULL,
 	CONSTRAINT "itinerary_pk" PRIMARY KEY ("itineraryId")
 ) WITH (
   OIDS=FALSE

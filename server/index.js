@@ -1,4 +1,5 @@
 require('dotenv/config');
+const fetch = require('node-fetch');
 const pg = require('pg');
 const express = require('express');
 const errorMiddleware = require('./error-middleware');
@@ -30,6 +31,16 @@ app.get('/api/trip', (req, res, next) => {
     .catch(err => { next(err); });
 });
 
+app.get('/api/places/:id', (req, res, next) => {
+  const ApiKey = process.env.REACT_APP_GOOGLE_KEY;
+  const placeId = req.params.id;
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name%2Cadr_address%2Crating%2Cuser_ratings_total%2Cwebsite%2Copening_hours%2Cformatted_phone_number&key=${ApiKey}`;
+  fetch(url)
+    .then(response => response.json())
+    .then(result => res.json(result))
+    .catch(err => next(err));
+});
+
 app.get('/api/trip/:tripId', (req, res, next) => {
   const tripId = parseInt(req.params.tripId, 10);
   if (!tripId) {
@@ -51,6 +62,28 @@ app.get('/api/trip/:tripId', (req, res, next) => {
     });
 });
 
+app.get('/api/itinerary/:tripId', (req, res, next) => {
+  const tripId = parseInt(req.params.tripId, 10);
+  if (!tripId) {
+    throw new ClientError(400, 'tripId must be a positive integer');
+  }
+  const sql = `
+  select *
+  from "itinerary"
+  where "tripId" = $1
+  order by "timeStart"`;
+
+  const params = [tripId];
+
+  db.query(sql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(404, `cannot find trip with tripId ${tripId}`);
+      }
+      res.json(result.rows);
+    });
+});
+
 app.post('/api/trip', (req, res, next) => {
   const { destination, startDate, endDate, icon } = req.body;
   if (!destination || !startDate || !endDate || !icon) {
@@ -67,6 +100,26 @@ app.post('/api/trip', (req, res, next) => {
     .then(result => {
       const newTrip = result.rows[0];
       res.status(201).json(newTrip);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/itinerary', (req, res, next) => {
+  const { adrAddress, address, date, endTime, hours, name, numOfRatings, phoneNum, placeId, rating, startTime, tripId, website } = req.body;
+  if (!date || !endTime || !startTime || !address) {
+    throw new ClientError(400, 'date, starttime, endtime and place are required fields');
+  }
+  const sql = `
+  insert into "itinerary" ("address", "date", "hours", "name", "userRatingsTotal", "phoneNumber", "placeId", "rating", "timeEnd", "timeStart", "tripId", "website", "userId")
+  values ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+  returning *`;
+
+  const params = [adrAddress, date, hours, name, numOfRatings, phoneNum, placeId, rating, endTime, startTime, tripId, website, 1];
+
+  db.query(sql, params)
+    .then(result => {
+      const itinerary = result.rows[0];
+      res.status(201).json(itinerary);
     })
     .catch(err => next(err));
 });

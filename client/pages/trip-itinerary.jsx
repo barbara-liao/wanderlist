@@ -7,7 +7,8 @@ export default class TripItinerary extends React.Component {
     this.state = {
       weather: null,
       trip: null,
-      hasFetched: false
+      itineraries: null,
+      tripId: this.props.tripId
     };
   }
 
@@ -18,6 +19,13 @@ export default class TripItinerary extends React.Component {
         this.setState({ trip });
       })
       .catch(err => console.error('Error: ', err));
+
+    fetch(`api/itinerary/${this.props.tripId}`)
+      .then(response => response.json())
+      .then(itineraries => {
+        this.setState({ itineraries });
+      })
+      .catch(err => console.error('Error: ', err));
   }
 
   render() {
@@ -26,9 +34,12 @@ export default class TripItinerary extends React.Component {
       <>
         <div className="header-container">
           <div className="row">
-            <div className="header-margin">
+            <div className="column-half header-margin">
               <h2 className="title-margin">My Itinerary</h2>
               <p className="title-margin trip-to-font">Trip to Honolulu</p>
+            </div>
+            <div className="column-half flex align-center justify-end">
+              <a className="add-edit-button" id="add-button" href={`#add-edit-trip?tripId=${this.state.tripId}`}><i className="fas fa-plus"></i></a>
             </div>
           </div>
         </div>
