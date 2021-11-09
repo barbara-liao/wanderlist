@@ -53,14 +53,6 @@ export default class NewTrip extends React.Component {
       .then(res => res.json())
       .then(result => {
         window.location.hash = '#trips';
-        this.setState({
-          modalOpen: false,
-          selectedIcon: 'icons/icon-placeholder.svg',
-          icon: 'icons/icon-placeholder.svg',
-          destination: '',
-          startDate: '',
-          endDate: ''
-        });
       });
 
     form.reset();

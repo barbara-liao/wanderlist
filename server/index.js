@@ -82,6 +82,27 @@ app.post('/api/trip', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/itinerary', (req, res, next) => {
+  const { adrAddress, address, date, endTime, hours, name, numOfRatings, phoneNum, placeId, rating, startTime, tripId, website } = req.body;
+  if (!date || !endTime || !startTime || !address) {
+    throw new ClientError(400, 'date, starttime, endtime and place are required fields');
+  }
+  const sql = `
+  insert into "itinerary" ("address", "date", "hours", "name", "userRatingsTotal", "phoneNumber", "placeId", "rating", "timeEnd", "timeStart", "tripId", "website", "userId")
+  values ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+  returning *
+  `;
+
+  const params = [adrAddress, date, hours, name, numOfRatings, phoneNum, placeId, rating, endTime, startTime, tripId, website, 1];
+
+  db.query(sql, params)
+    .then(result => {
+      const itinerary = result.rows[0];
+      res.status(201).json(itinerary);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

@@ -4,7 +4,7 @@ import parseRoute from './lib/parse-route';
 import Navbar from './components/navbar';
 import ViewTrips from './pages/trips';
 import TripItinerary from './pages/trip-itinerary';
-import ItineraryForm from './pages/itinerary-form';
+import ItineraryPage from './pages/itinerary-page';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -33,7 +33,7 @@ export default class App extends React.Component {
       return <TripItinerary tripId={tripId} />;
     } else if (route.path === 'add-edit-trip') {
       const tripId = route.params.get('tripId');
-      return <ItineraryForm tripId={tripId}/>;
+      return <ItineraryPage tripId={tripId}/>;
     }
   }
 

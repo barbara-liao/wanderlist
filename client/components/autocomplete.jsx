@@ -16,7 +16,6 @@ export class Autocomplete extends Component {
   }
 
   render() {
-
     if (!this.props.google) {
       return <div>Loading...</div>;
     }

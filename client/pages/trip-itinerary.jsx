@@ -1,6 +1,5 @@
 import React from 'react';
 import ItineraryList from '../components/itinerary-list';
-// import parseRoute from '../lib/parse-route';
 
 export default class TripItinerary extends React.Component {
   constructor(props) {
@@ -22,7 +21,6 @@ export default class TripItinerary extends React.Component {
   }
 
   render() {
-    // console.log(this.state);
     if (this.state.trip === null) { return null; }
     return (
       <>
