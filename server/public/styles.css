@@ -221,4 +221,12 @@ hr {
     padding: 6px 13px;
     font-size: 1.5rem;
   }
+
+  .itinerary-input {
+    width: 20rem;
+  }
+
+  .itinerary-font {
+    font-size: 0.75rem;
+  }
 }
