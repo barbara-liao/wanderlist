@@ -1,7 +1,6 @@
 import React from 'react';
 import Autocomplete from './autocomplete';
 import { GoogleApiWrapper } from 'google-maps-react';
-// import { geocodeByPlaceId } from 'react-places-autocomplete';
 
 export class Itinerary extends React.Component {
   constructor(props) {
@@ -22,10 +21,8 @@ export class Itinerary extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // console.log('hello');
 
     // const form = event.target;
-    // console.log(form);
     // const req = {
     //   method: 'POST',
     //   headers: {
@@ -55,6 +52,17 @@ export class Itinerary extends React.Component {
       address,
       placeId
     });
+
+    fetch(`api/places/${placeId}`)
+      .then(response => response.json())
+      .then(result => {
+        this.setState({
+          details: result,
+          placeId,
+          address
+        });
+      })
+      .catch(err => console.error(err));
   }
 
   handleChange(event) {
@@ -67,7 +75,6 @@ export class Itinerary extends React.Component {
   }
 
   render() {
-    // console.log(this.state);
     return (
       <>
         <div className="row flex-column">

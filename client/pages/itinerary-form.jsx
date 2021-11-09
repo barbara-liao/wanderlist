@@ -17,7 +17,9 @@ export default class ItineraryForm extends React.Component {
 
   handleSubmit() {
     event.preventDefault();
-
+    // console.log('hello!');
+    // const req = {
+    //   method: 'POST'
     // };
 
     // fetch('api/');

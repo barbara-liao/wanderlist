@@ -33,6 +33,7 @@ CREATE TABLE "itinerary" (
 	"userId" serial NOT NULL,
 	"date" DATE NOT NULL,
 	"tripId" integer NOT NULL,
+  "placeId" TEXT,
 	CONSTRAINT "itinerary_pk" PRIMARY KEY ("itineraryId")
 ) WITH (
   OIDS=FALSE

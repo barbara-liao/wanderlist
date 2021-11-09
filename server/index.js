@@ -1,4 +1,5 @@
 require('dotenv/config');
+const fetch = require('node-fetch');
 const pg = require('pg');
 const express = require('express');
 const errorMiddleware = require('./error-middleware');
@@ -28,6 +29,16 @@ app.get('/api/trip', (req, res, next) => {
   db.query(sql)
     .then(result => res.json(result.rows))
     .catch(err => { next(err); });
+});
+
+app.get('/api/places/:id', (req, res, next) => {
+  const ApiKey = process.env.REACT_APP_GOOGLE_KEY;
+  const placeId = req.params.id;
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name%2Cadr_address%2Crating%2Cuser_ratings_total%2Cwebsite%2Copening_hours%2Cformatted_phone_number&key=${ApiKey}`;
+  fetch(url)
+    .then(response => response.json())
+    .then(result => res.json(result))
+    .catch(err => console.error(err));
 });
 
 app.get('/api/trip/:tripId', (req, res, next) => {
