@@ -38,7 +38,7 @@ app.get('/api/places/:id', (req, res, next) => {
   fetch(url)
     .then(response => response.json())
     .then(result => res.json(result))
-    .catch(err => console.error(err));
+    .catch(err => next(err));
 });
 
 app.get('/api/trip/:tripId', (req, res, next) => {

@@ -67,5 +67,5 @@ export class Autocomplete extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: ('AIzaSyADlDyACi5WP6xynptx0Au3ZXC1xhzBTRg')
+  apiKey: (process.env.GOOGLE_MAPS_API_KEY)
 })(Autocomplete);
