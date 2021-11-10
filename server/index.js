@@ -32,7 +32,7 @@ app.get('/api/trip', (req, res, next) => {
 });
 
 app.get('/api/places/:id', (req, res, next) => {
-  const ApiKey = process.env.REACT_APP_GOOGLE_KEY;
+  const ApiKey = process.env.GOOGLE_MAPS_API_KEY_BACKEND;
   const placeId = req.params.id;
   const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name%2Cadr_address%2Crating%2Cuser_ratings_total%2Cwebsite%2Copening_hours%2Cformatted_phone_number&key=${ApiKey}`;
   fetch(url)
@@ -59,7 +59,8 @@ app.get('/api/trip/:tripId', (req, res, next) => {
         throw new ClientError(404, `cannot find trip with tripId ${tripId}`);
       }
       res.json(result.rows[0]);
-    });
+    })
+    .catch(err => next(err));
 });
 
 app.get('/api/itinerary/:tripId', (req, res, next) => {
@@ -77,11 +78,9 @@ app.get('/api/itinerary/:tripId', (req, res, next) => {
 
   db.query(sql, params)
     .then(result => {
-      if (!result.rows[0]) {
-        throw new ClientError(404, `cannot find trip with tripId ${tripId}`);
-      }
       res.json(result.rows);
-    });
+    })
+    .catch(err => next(err));
 });
 
 app.post('/api/trip', (req, res, next) => {

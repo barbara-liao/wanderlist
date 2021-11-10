@@ -9,7 +9,11 @@ body {
 
 hr {
   border-top: 1px solid #dadada;
-  width: 100%;
+  width: 95%;
+}
+
+.hidden {
+  display: none;
 }
 
 .poppins {
@@ -152,6 +156,15 @@ hr {
   margin: 2px 5px;
 }
 
+.icon-detail {
+  color: #606060;
+}
+
+.star-detail {
+  color: #ffb236;
+  font-size: 0.89rem;
+}
+
 .select-icon {
   background-color: #e3913f;
   color: white;
@@ -164,6 +177,10 @@ hr {
 
 .trip-list {
   margin: 5px 0;
+}
+
+.font-bold {
+  font-weight: 600;
 }
 
 .trip-to-font {

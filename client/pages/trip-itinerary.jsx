@@ -23,6 +23,7 @@ export default class TripItinerary extends React.Component {
     fetch(`api/itinerary/${this.props.tripId}`)
       .then(response => response.json())
       .then(itineraries => {
+        // console.log(itineraries);
         this.setState({ itineraries });
       })
       .catch(err => console.error('Error: ', err));
