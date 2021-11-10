@@ -10,7 +10,7 @@ export class ItineraryForm extends React.Component {
       address: '',
       date: '',
       endTime: '',
-      hours: {},
+      hours: [],
       name: '',
       numOfRatings: null,
       phoneNum: '',
@@ -37,7 +37,7 @@ export class ItineraryForm extends React.Component {
       .then(result => {
         const { name, rating, website } = result.result;
         const phoneNum = result.result.formatted_phone_number;
-        const hours = result.result.opening_hours;
+        const hours = result.result.opening_hours.weekday_text;
         const numOfRatings = result.result.user_ratings_total;
         const adrAddress = result.result.adr_address;
         this.setState({
@@ -144,5 +144,5 @@ export class ItineraryForm extends React.Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: ('AIzaSyADlDyACi5WP6xynptx0Au3ZXC1xhzBTRg')
+  apiKey: (process.env.GOOGLE_MAPS_API_KEY)
 })(ItineraryForm);
