@@ -63,10 +63,10 @@ app.get('/api/trip/:tripId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/itinerary/:tripId', (req, res, next) => {
+app.get('/api/trip/:tripId/itinerary', (req, res, next) => {
   const tripId = parseInt(req.params.tripId, 10);
   if (!tripId) {
-    throw new ClientError(400, 'tripId must be a positive integer');
+    throw new ClientError(400, `cannot find trip with tripId ${tripId}`);
   }
   const sql = `
   select *
@@ -79,6 +79,25 @@ app.get('/api/itinerary/:tripId', (req, res, next) => {
   db.query(sql, params)
     .then(result => {
       res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/itinerary/:itineraryId', (req, res, next) => {
+  const itineraryId = parseInt(req.params.itineraryId, 10);
+  if (!itineraryId) {
+    throw new ClientError(400, `cannot find trip with itineraryId ${itineraryId}`);
+  }
+  const sql = `
+  select "name", "date", "timeStart", "timeEnd"
+  from "itinerary"
+  where "itineraryId" = $1`;
+
+  const params = [itineraryId];
+
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows[0]);
     })
     .catch(err => next(err));
 });

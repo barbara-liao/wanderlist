@@ -152,6 +152,15 @@
   position: absolute;
 }
 
+.position-relative {
+  position: relative;
+}
+
+.position {
+  right: 1.5rem;
+  top: 4.8rem;
+}
+
 .container-padding {
   padding: 1rem;
 }
@@ -166,6 +175,10 @@
 
 .ellipses-padding {
   padding: 12px;
+}
+
+.modal-padding {
+  padding: 0 10px;
 }
 
 @media screen and (max-width: 576px) {

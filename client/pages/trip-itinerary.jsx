@@ -8,8 +8,12 @@ export default class TripItinerary extends React.Component {
       weather: null,
       trip: null,
       itineraries: null,
+      itemViewed: null,
+      itemSelectedId: null,
+      itemSelected: null,
       tripId: this.props.tripId
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -20,12 +24,49 @@ export default class TripItinerary extends React.Component {
       })
       .catch(err => console.error('Error: ', err));
 
-    fetch(`api/itinerary/${this.props.tripId}`)
+    fetch(`api/trip/${this.props.tripId}/itinerary`)
       .then(response => response.json())
       .then(itineraries => {
         this.setState({ itineraries });
       })
       .catch(err => console.error('Error: ', err));
+  }
+
+  handleClick(event) {
+    if (event.target.nodeName !== 'I') {
+      const id = event.target.id;
+      if (id === 'edit') {
+        // const id = event.target.id;
+        // console.log('hello', id);
+      }
+
+      if (this.state.itemViewed === Number(id)) {
+        this.setState({
+          itemViewed: null
+        });
+      } else {
+        this.setState({
+          itemViewed: Number(id)
+        });
+      }
+    } else if (event.target.nodeName === 'I') {
+      const itineraryId = Number(event.target.id);
+      const itemSelectedId = Number(this.state.itemSelectedId);
+      fetch(`api/itinerary/${itineraryId}`)
+        .then(response => response.json())
+        .then(itinerary => {
+          this.setState({
+            itemSelected: itinerary,
+            itemSelectedId: Number(itineraryId)
+          });
+          if (itemSelectedId === itineraryId) {
+            this.setState({ itemSelectedId: null });
+          } else {
+            this.setState({ itemSelectedId: itineraryId });
+          }
+        })
+        .catch(err => console.error(err));
+    }
   }
 
   render() {
@@ -43,7 +84,7 @@ export default class TripItinerary extends React.Component {
             </div>
           </div>
         </div>
-        <ItineraryList trips={this.state} />
+        <ItineraryList onClick={this.handleClick} trips={this.state} />
       </>
     );
   }

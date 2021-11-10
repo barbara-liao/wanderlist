@@ -148,6 +148,14 @@ hr {
   padding: 25px;
 }
 
+.edit-delete-modal {
+  height: 3.4rem;
+  width: 5rem;
+  background-color: white;
+  box-shadow: 1px 1px 4px gray;
+  border-radius: 3px;
+}
+
 .icon {
   width: 80px;
   height: 80px;
