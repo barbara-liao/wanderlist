@@ -87,7 +87,7 @@ class Itinerary extends React.Component {
               </div>
             </div>
             )}
-            { website && (
+            { phoneNumber && (
             <div className="row title-margin">
               <i className="fas fa-phone icon-detail icon-margin"></i>
               <div className="row">
