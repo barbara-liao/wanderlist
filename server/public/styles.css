@@ -9,7 +9,7 @@ body {
 
 hr {
   border-top: 1px solid #dadada;
-  width: 95%;
+  width: 100%;
 }
 
 .hidden {
@@ -126,7 +126,7 @@ hr {
   cursor: pointer;
 }
 
-.add-edit-button {
+.add-button {
   background-color: #e3913f;
   color: white;
   padding: 5.6px 13px;
@@ -209,6 +209,10 @@ hr {
   color: black;
 }
 
+.hover:hover {
+  background-color: #c0c0c0;
+}
+
 @media screen and (max-width: 576px) {
   .icon-modal {
     height: 610px;
@@ -242,7 +246,7 @@ hr {
     font-size: 0.8rem;
   }
 
-  .add-edit-button {
+  .add-button {
     padding: 6px 13px;
     font-size: 1.5rem;
   }

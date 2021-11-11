@@ -2,7 +2,7 @@ import React from 'react';
 import Autocomplete from './autocomplete';
 import { GoogleApiWrapper } from 'google-maps-react';
 
-export class ItineraryForm extends React.Component {
+export class AddItineraryForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,6 +24,19 @@ export class ItineraryForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.handleAutocompleteChange = this.handleAutocompleteChange.bind(this);
+  }
+
+  componentDidMount() {
+    const { itineraryId } = this.props;
+    fetch(`api/itinerary/${itineraryId}`)
+      .then(response => response.json())
+      .then(itinerary => {
+        this.setState({
+          itemSelected: itinerary,
+          itemSelectedId: Number(itineraryId)
+        });
+      })
+      .catch(err => console.error(err));
   }
 
   handleSelect(address, placeId) {
@@ -145,4 +158,4 @@ export class ItineraryForm extends React.Component {
 
 export default GoogleApiWrapper({
   apiKey: (process.env.GOOGLE_MAPS_API_KEY)
-})(ItineraryForm);
+})(AddItineraryForm);

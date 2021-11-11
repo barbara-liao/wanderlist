@@ -11,6 +11,7 @@ export default class TripItinerary extends React.Component {
       itemViewed: null,
       itemSelectedId: null,
       itemSelected: null,
+      action: '',
       tripId: this.props.tripId
     };
     this.handleClick = this.handleClick.bind(this);
@@ -36,36 +37,31 @@ export default class TripItinerary extends React.Component {
     if (event.target.nodeName !== 'I') {
       const id = event.target.id;
       if (id === 'edit') {
-        // const id = event.target.id;
-        // console.log('hello', id);
+        const id = event.target.id;
+        this.setState({ action: id });
+
       }
 
       if (this.state.itemViewed === Number(id)) {
         this.setState({
-          itemViewed: null
+          itemViewed: null,
+          itemSelectedId: null
         });
       } else {
         this.setState({
-          itemViewed: Number(id)
+          itemViewed: Number(id),
+          itemSelectedId: null
         });
       }
     } else if (event.target.nodeName === 'I') {
       const itineraryId = Number(event.target.id);
       const itemSelectedId = Number(this.state.itemSelectedId);
-      fetch(`api/itinerary/${itineraryId}`)
-        .then(response => response.json())
-        .then(itinerary => {
-          this.setState({
-            itemSelected: itinerary,
-            itemSelectedId: Number(itineraryId)
-          });
-          if (itemSelectedId === itineraryId) {
-            this.setState({ itemSelectedId: null });
-          } else {
-            this.setState({ itemSelectedId: itineraryId });
-          }
-        })
-        .catch(err => console.error(err));
+
+      if (itemSelectedId === itineraryId) {
+        this.setState({ itemSelectedId: null });
+      } else {
+        this.setState({ itemSelectedId: itineraryId });
+      }
     }
   }
 
@@ -80,7 +76,7 @@ export default class TripItinerary extends React.Component {
               <p className="title-margin trip-to-font">Trip to Honolulu</p>
             </div>
             <div className="column-half flex align-center justify-end">
-              <a className="add-edit-button" id="add-button" href={`#add-edit-trip?tripId=${this.state.tripId}`}><i className="fas fa-plus"></i></a>
+              <a className="add-button" id="add" href={`#add-trip?tripId=${this.state.tripId}`}><i className="fas fa-plus"></i></a>
             </div>
           </div>
         </div>

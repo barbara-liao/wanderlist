@@ -31,9 +31,12 @@ export default class App extends React.Component {
     } else if (route.path === 'trip-itinerary') {
       const tripId = route.params.get('tripId');
       return <TripItinerary tripId={tripId} />;
-    } else if (route.path === 'add-edit-trip') {
+    } else if (route.path === 'add-trip') {
       const tripId = route.params.get('tripId');
-      return <ItineraryPage tripId={tripId}/>;
+      return <ItineraryPage routePath={route.path} tripId={tripId}/>;
+    } else if (route.path === 'edit-trip') {
+      const itineraryId = route.params.get('itineraryId');
+      return <ItineraryPage routePath={route.path} itineraryId={itineraryId} />;
     }
   }
 

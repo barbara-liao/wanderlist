@@ -1,5 +1,6 @@
 import React from 'react';
-import ItineraryForm from '../components/itinerary-form';
+import AddItineraryForm from '../components/add-itinerary-form';
+import EditItineraryForm from '../components/edit-itinerary-form';
 
 export default class ItineraryPage extends React.Component {
   render() {
@@ -9,7 +10,15 @@ export default class ItineraryPage extends React.Component {
           <h3 className="header-margin">Add a Place</h3>
         </div>
         <div className="flex justify-center">
-          <ItineraryForm tripId={this.props.tripId}/>
+          {
+            this.props.routePath === 'add-trip'
+              ? (
+              <AddItineraryForm routePath={this.props.routePath} tripId={this.props.tripId}/>
+                )
+              : (
+              <EditItineraryForm routePath={this.props.routePath} itineraryId={this.props.itineraryId}/>
+                )
+          }
         </div>
       </div>
     );
