@@ -1,55 +1,33 @@
 import React from 'react';
-import Autocomplete from './autocomplete';
-import { GoogleApiWrapper } from 'google-maps-react';
+import { defaultDate } from '../lib/default-date';
+import { defaultTime } from '../lib/default-time';
 
-export class ItineraryForm extends React.Component {
+export default class EditItineraryForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      adrAddress: '',
-      address: '',
-      date: '',
-      endTime: '',
-      hours: [],
-      name: '',
-      numOfRatings: null,
-      phoneNum: '',
-      placeId: '',
-      rating: null,
-      startTime: '',
-      tripId: props.tripId,
-      website: ''
+      date: null,
+      endTime: null,
+      itemSelected: null,
+      itemSelectedId: null,
+      itineraryId: props.itineraryId,
+      startTime: null
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
-    this.handleAutocompleteChange = this.handleAutocompleteChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSelect(address, placeId) {
-    this.setState({
-      address,
-      placeId
-    });
-
-    fetch(`api/places/${placeId}`)
+  componentDidMount() {
+    const itineraryId = this.props.itineraryId;
+    fetch(`api/itinerary/${itineraryId}`)
       .then(response => response.json())
-      .then(result => {
-        const { name, rating, website } = result.result;
-        const phoneNum = result.result.formatted_phone_number;
-        const hours = result.result.opening_hours.weekday_text;
-        const numOfRatings = result.result.user_ratings_total;
-        const adrAddress = result.result.adr_address;
+      .then(itinerary => {
         this.setState({
-          placeId,
-          address,
-          name,
-          rating,
-          website,
-          phoneNum,
-          hours,
-          numOfRatings,
-          adrAddress
+          date: itinerary.date,
+          endTime: itinerary.timeEnd,
+          itemSelected: itinerary,
+          itemSelectedId: Number(itineraryId),
+          startTime: itinerary.timeStart
         });
       })
       .catch(err => console.error(err));
@@ -60,16 +38,12 @@ export class ItineraryForm extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleAutocompleteChange(event) {
-    this.setState({ address: event });
-  }
-
   handleSubmit(event) {
     event.preventDefault();
 
     const form = event.target;
     const req = {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -78,21 +52,25 @@ export class ItineraryForm extends React.Component {
     fetch('api/itinerary', req)
       .then(res => res.json())
       .then(result => {
-        window.location.hash = `#trip-itinerary?tripId=${this.state.tripId}`;
+        window.location.hash = `#trip-itinerary?tripId=${this.props.tripId}`;
       });
 
     form.reset();
   }
 
   render() {
+    if (!this.state.itemSelected) { return null; }
+    const { name, date, timeStart, timeEnd } = this.state.itemSelected;
+    const formattedDate = defaultDate(date);
+    const formattedStartTime = defaultTime(timeStart);
+    const formattedEndTime = defaultTime(timeEnd);
     return (
       <>
         <form onSubmit={this.handleSubmit}>
           <div className="row flex-column">
-            <label htmlFor="destination">
-              Search Places
-            </label>
-            <Autocomplete onChange={this.handleAutocompleteChange} onSelect={this.handleSelect} name="address" address={this.state.address} />
+            <div>
+              <h4 className="day-margin">{name}</h4>
+            </div>
           </div>
           <div className="row flex-column day-margin">
             <label htmlFor="destination">
@@ -103,6 +81,7 @@ export class ItineraryForm extends React.Component {
               id="date"
               type="date"
               name="date"
+              defaultValue={formattedDate}
               onChange={this.handleChange}
               className="itinerary-input poppins">
             </input>
@@ -116,6 +95,7 @@ export class ItineraryForm extends React.Component {
               id="startTime"
               type="time"
               name="startTime"
+              defaultValue={formattedStartTime}
               onChange={this.handleChange}
               className="itinerary-input poppins">
             </input>
@@ -129,20 +109,17 @@ export class ItineraryForm extends React.Component {
               id="endTime"
               type="time"
               name="endTime"
+              defaultValue={formattedEndTime}
               onChange={this.handleChange}
               className="itinerary-input poppins">
             </input>
           </div>
           <div className="row justify-space-between header-margin">
             <a className="cancel-button flex justify-center align-center" href={`#trip-itinerary?tripId=${this.props.tripId}`}>Cancel</a>
-            <button className="add-save-button poppins">Add</button>
+            <button className="add-save-button poppins">Save</button>
           </div>
         </form>
       </>
     );
   }
 }
-
-export default GoogleApiWrapper({
-  apiKey: (process.env.GOOGLE_MAPS_API_KEY)
-})(ItineraryForm);

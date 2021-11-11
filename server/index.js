@@ -23,9 +23,9 @@ app.use(jsonMiddleware);
 
 app.get('/api/trip', (req, res, next) => {
   const sql = `
-  select *
-  from "trip"
-  order by "startDate"`;
+    select *
+      from "trip"
+    order by "startDate"`;
   db.query(sql)
     .then(result => res.json(result.rows))
     .catch(err => { next(err); });
@@ -47,9 +47,9 @@ app.get('/api/trip/:tripId', (req, res, next) => {
     throw new ClientError(400, 'tripId must be a positive integer');
   }
   const sql = `
-  select *
-  from "trip"
-  where "tripId" = $1`;
+    select *
+      from "trip"
+     where "tripId" = $1`;
 
   const params = [tripId];
 
@@ -63,16 +63,16 @@ app.get('/api/trip/:tripId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/itinerary/:tripId', (req, res, next) => {
+app.get('/api/trip/:tripId/itinerary', (req, res, next) => {
   const tripId = parseInt(req.params.tripId, 10);
   if (!tripId) {
-    throw new ClientError(400, 'tripId must be a positive integer');
+    throw new ClientError(400, `cannot find trip with tripId ${tripId}`);
   }
   const sql = `
-  select *
-  from "itinerary"
-  where "tripId" = $1
-  order by "timeStart"`;
+    select *
+     from "itinerary"
+    where "tripId" = $1
+    order by "timeStart"`;
 
   const params = [tripId];
 
@@ -83,15 +83,34 @@ app.get('/api/itinerary/:tripId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/itinerary/:itineraryId', (req, res, next) => {
+  const itineraryId = parseInt(req.params.itineraryId, 10);
+  if (!itineraryId) {
+    throw new ClientError(400, `cannot find trip with itineraryId ${itineraryId}`);
+  }
+  const sql = `
+    select "name", "date", "timeStart", "timeEnd"
+      from "itinerary"
+     where "itineraryId" = $1`;
+
+  const params = [itineraryId];
+
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.post('/api/trip', (req, res, next) => {
   const { destination, startDate, endDate, icon } = req.body;
   if (!destination || !startDate || !endDate || !icon) {
     throw new ClientError(400, 'destination, startdate, enddate and icon are required fields');
   }
   const sql = `
-  insert into "trip" ("destination", "startDate", "endDate", "icon", "userId")
-  values ($1, $2, $3, $4, 1)
-  returning *`;
+    insert into "trip" ("destination", "startDate", "endDate", "icon", "userId")
+        values ($1, $2, $3, $4, 1)
+    returning *`;
 
   const params = [destination, startDate, endDate, icon];
 
@@ -109,9 +128,9 @@ app.post('/api/itinerary', (req, res, next) => {
     throw new ClientError(400, 'date, starttime, endtime and place are required fields');
   }
   const sql = `
-  insert into "itinerary" ("address", "date", "hours", "name", "userRatingsTotal", "phoneNumber", "placeId", "rating", "timeEnd", "timeStart", "tripId", "website", "userId")
-  values ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
-  returning *`;
+    insert into "itinerary" ("address", "date", "hours", "name", "userRatingsTotal", "phoneNumber", "placeId", "rating", "timeEnd", "timeStart", "tripId", "website", "userId")
+        values ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+    returning *`;
 
   const params = [adrAddress, date, hours, name, numOfRatings, phoneNum, placeId, rating, endTime, startTime, tripId, website, 1];
 
@@ -119,6 +138,29 @@ app.post('/api/itinerary', (req, res, next) => {
     .then(result => {
       const itinerary = result.rows[0];
       res.status(201).json(itinerary);
+    })
+    .catch(err => next(err));
+});
+
+app.patch('/api/itinerary', (req, res, next) => {
+  const { endTime, startTime, date, itineraryId } = req.body;
+  if (!date || !endTime || !startTime || !itineraryId) {
+    throw new ClientError(400, 'date, starttime, endtime and place are required fields');
+  }
+  const sql = `
+    update "itinerary"
+       set "date" = $1,
+           "timeStart" = $2,
+           "timeEnd" = $3
+     where "itineraryId" = $4
+     returning *`;
+
+  const params = [date, startTime, endTime, itineraryId];
+
+  db.query(sql, params)
+    .then(result => {
+      const updatedItinerary = result.rows[0];
+      res.status(201).json(updatedItinerary);
     })
     .catch(err => next(err));
 });

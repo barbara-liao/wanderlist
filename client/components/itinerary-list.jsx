@@ -5,40 +5,17 @@ import parseDate from '../lib/parse-date';
 import parseOperatingHours from '../lib/parse-operating-hours';
 import parseTime from '../lib/parse-time';
 
-class Itinerary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { itemViewed: null };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(event) {
-    const id = event.target.id;
-    if (event.target.nodeName !== 'I') {
-      if (this.state.itemViewed === Number(id)) {
-        this.setState({
-          itemViewed: null
-        });
-      } else {
-        this.setState({
-          itemViewed: Number(id)
-        });
-      }
-    }
-  }
-
-  render() {
-    const itinerary = this.props.itinerary;
-    const { name, timeStart, timeEnd, address, rating, userRatingsTotal, hours, website, phoneNumber } = itinerary;
-    const itineraryId = this.props.itineraryId;
-    const parsedHours = parseOperatingHours(hours);
-    const formattedRatingsNum = Number(parseFloat(userRatingsTotal)).toLocaleString('en');
-    return (
+function Itinerary(props) {
+  const { tripId, itemSelectedId, itemViewed, itinerary, itineraryId } = props;
+  const { name, timeStart, timeEnd, address, rating, userRatingsTotal, hours, website, phoneNumber } = itinerary;
+  const parsedHours = parseOperatingHours(hours);
+  const formattedRatingsNum = Number(parseFloat(userRatingsTotal)).toLocaleString('en');
+  return (
       <>
         <div className="row itinerary-card flex-column day-margin">
-          <a>
-            <div onClick={this.handleClick} className="row itinerary-header justify-space-between">
-              <div id={itineraryId} className="col-nine-tenth flex flex-column justify-center padding-left">
+          <div onClick={props.onClick} className="row itinerary-header justify-space-between">
+            <a id="display" className="col-nine-tenth margin-auto">
+              <div id={itineraryId} className="flex flex-column justify-center padding-left">
                 <div id={itineraryId} className="row">
                   <h4 id={itineraryId} className="itinerary-margin">{name}</h4>
                 </div>
@@ -49,12 +26,18 @@ class Itinerary extends React.Component {
                   <p id={itineraryId} className="itinerary-margin itinerary-font">{parseAddress(address)}</p>
                 </div>
               </div>
-              <div className="col-one-tenth flex justify-center align-center">
+            </a>
+            <div className="col-one-tenth flex justify-center align-center position-relative">
+              <a id="edit-delete" onClick={props.onClick}>
                 <i id={itineraryId} className="fas fa-ellipsis-v ellipses-padding"></i>
+              </a>
+              <div className={itemSelectedId === itineraryId ? 'edit-delete-modal flex flex-column justify-center position-absolute position' : 'edit-delete-modal flex flex-column justify-center position-absolute position hidden'}>
+              <a onClick={props.onClick} href={`#edit-trip?tripId=${tripId}&itineraryId=${itineraryId}`} id="edit" className="itinerary-margin itinerary-font modal-padding hover color-black">Edit</a>
+                <a id="remove" className="itinerary-margin itinerary-font modal-padding hover color-black">Remove</a>
               </div>
             </div>
-          </a>
-          <div className={this.state.itemViewed === itineraryId ? 'itinerary-body padding-left' : 'itinerary-body padding-left hidden'}>
+          </div>
+          <div className={itemViewed === itineraryId ? 'itinerary-body padding-left' : 'itinerary-body padding-left hidden'}>
             <div className="row title-margin">
               <p className="margin-none">Add notes here...</p>
             </div>
@@ -98,12 +81,12 @@ class Itinerary extends React.Component {
           </div>
         </div>
       </>
-    );
-  }
+  );
 }
 
 function Day(props) {
   const date = props.day;
+  const { itemSelected, itemSelectedId, itemViewed, tripId } = props;
   const itineraries = props.itineraries;
   if (itineraries === null) { return null; }
   return (
@@ -117,7 +100,8 @@ function Day(props) {
           const itineraryDate = parseDate(itinerary.date);
           if (date.date === itineraryDate) {
             return (
-              <Itinerary itineraryId={itinerary.itineraryId} key={itinerary.placeId} itinerary={itinerary} />
+              <Itinerary onClick={props.onClick} itineraryId={itinerary.itineraryId} key={itinerary.placeId}
+                itemSelected={itemSelected} itemSelectedId={itemSelectedId} itemViewed={itemViewed} tripId={tripId} itinerary={itinerary} />
             );
           } else { return null; }
         })
@@ -127,6 +111,7 @@ function Day(props) {
 }
 
 function ItineraryList(props) {
+  const { itemSelected, itemSelectedId, itemViewed, tripId } = props.trips;
   const { startDate, endDate } = props.trips.trip;
   const { itineraries } = props.trips;
   const dates = getRange(startDate, endDate);
@@ -137,7 +122,8 @@ function ItineraryList(props) {
       dates.map(day => {
         return (
           <div key={day.date} className="itinerary-container">
-          <Day itineraries={itineraries} day={day} />
+          <Day onClick={props.onClick} itineraries={itineraries} itemSelected={itemSelected}
+          itemSelectedId={itemSelectedId} itemViewed={itemViewed} tripId={tripId} day={day} />
           </div>
         );
       })
