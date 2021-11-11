@@ -1,4 +1,6 @@
 import React from 'react';
+import { defaultDate } from '../lib/default-date';
+import { defaultTime } from '../lib/default-time';
 
 export default class EditItineraryForm extends React.Component {
   constructor(props) {
@@ -24,8 +26,10 @@ export default class EditItineraryForm extends React.Component {
 
   render() {
     if (!this.state.itemSelected) { return null; }
-    const { name } = this.state.itemSelected;
-    // console.log(this.state);
+    const { name, date, timeStart, timeEnd } = this.state.itemSelected;
+    const formattedDate = defaultDate(date);
+    const formattedStartTime = defaultTime(timeStart);
+    const formattedEndTime = defaultTime(timeEnd);
     return (
       <>
         <form onSubmit={this.handleSubmit}>
@@ -43,6 +47,7 @@ export default class EditItineraryForm extends React.Component {
               id="date"
               type="date"
               name="date"
+              defaultValue={formattedDate}
               onChange={this.handleChange}
               className="itinerary-input poppins">
             </input>
@@ -56,6 +61,7 @@ export default class EditItineraryForm extends React.Component {
               id="startTime"
               type="time"
               name="startTime"
+              defaultValue={formattedStartTime}
               onChange={this.handleChange}
               className="itinerary-input poppins">
             </input>
@@ -69,6 +75,7 @@ export default class EditItineraryForm extends React.Component {
               id="endTime"
               type="time"
               name="endTime"
+              defaultValue={formattedEndTime}
               onChange={this.handleChange}
               className="itinerary-input poppins">
             </input>

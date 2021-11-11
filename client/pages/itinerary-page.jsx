@@ -7,7 +7,15 @@ export default class ItineraryPage extends React.Component {
     return (
       <div className="body-container">
         <div className="row">
-          <h3 className="header-margin">Add a Place</h3>
+          {
+            this.props.routePath === 'add-trip'
+              ? (
+                <h3 className="header-margin">Add a Place</h3>
+                )
+              : (
+                <h3 className="header-margin">Edit Place</h3>
+                )
+          }
         </div>
         <div className="flex justify-center">
           {
