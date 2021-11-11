@@ -35,6 +35,7 @@ export class AddItineraryForm extends React.Component {
     fetch(`api/places/${placeId}`)
       .then(response => response.json())
       .then(result => {
+        // console.log(result);
         const { name, rating, website } = result.result;
         const phoneNum = result.result.formatted_phone_number;
         const hours = result.result.opening_hours.weekday_text;

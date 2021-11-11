@@ -177,6 +177,10 @@ hr {
   color: #606060;
 }
 
+.arrow-icon {
+  font-size: 2rem;
+}
+
 .star-detail {
   color: #ffb236;
   font-size: 0.89rem;

@@ -34,7 +34,7 @@ app.get('/api/trip', (req, res, next) => {
 app.get('/api/places/:id', (req, res, next) => {
   const ApiKey = process.env.GOOGLE_MAPS_API_KEY_BACKEND;
   const placeId = req.params.id;
-  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name%2Cadr_address%2Crating%2Cuser_ratings_total%2Cwebsite%2Copening_hours%2Cformatted_phone_number&key=${ApiKey}`;
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name%2Cadr_address%2Crating%2Cuser_ratings_total%2Cwebsite%2Cgeometry%2Copening_hours%2Cformatted_phone_number&key=${ApiKey}`;
   fetch(url)
     .then(response => response.json())
     .then(result => res.json(result))
