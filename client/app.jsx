@@ -5,6 +5,7 @@ import Navbar from './components/navbar';
 import ViewTrips from './pages/trips';
 import TripItinerary from './pages/trip-itinerary';
 import ItineraryPage from './pages/itinerary-page';
+import GoogleMapPage from './pages/google-map-page';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -38,6 +39,9 @@ export default class App extends React.Component {
       const itineraryId = route.params.get('itineraryId');
       const tripId = route.params.get('tripId');
       return <ItineraryPage routePath={route.path} tripId={tripId} itineraryId={itineraryId} />;
+    } else if (route.path === 'maps') {
+      const tripId = route.params.get('tripId');
+      return <GoogleMapPage routePath={route.path} tripId={tripId} />;
     }
   }
 
