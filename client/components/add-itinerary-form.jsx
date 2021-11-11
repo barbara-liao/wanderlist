@@ -10,6 +10,7 @@ export class AddItineraryForm extends React.Component {
       address: '',
       date: '',
       endTime: '',
+      geometry: '',
       hours: [],
       name: '',
       numOfRatings: null,
@@ -41,9 +42,11 @@ export class AddItineraryForm extends React.Component {
         const hours = result.result.opening_hours.weekday_text;
         const numOfRatings = result.result.user_ratings_total;
         const adrAddress = result.result.adr_address;
+        const geometry = result.result.geometry.location;
         this.setState({
           placeId,
           address,
+          geometry,
           name,
           rating,
           website,

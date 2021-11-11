@@ -35,6 +35,7 @@ CREATE TABLE "itinerary" (
 	"tripId" integer NOT NULL,
   "hours" TEXT,
   "placeId" TEXT NOT NULL,
+  "geometry" TEXT NOT NULL,
 	CONSTRAINT "itinerary_pk" PRIMARY KEY ("itineraryId")
 ) WITH (
   OIDS=FALSE
