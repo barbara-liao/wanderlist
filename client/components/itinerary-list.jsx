@@ -6,7 +6,7 @@ import parseOperatingHours from '../lib/parse-operating-hours';
 import parseTime from '../lib/parse-time';
 
 function Itinerary(props) {
-  const { itemSelectedId, itemViewed, itinerary, itineraryId } = props;
+  const { tripId, itemSelectedId, itemViewed, itinerary, itineraryId } = props;
   const { name, timeStart, timeEnd, address, rating, userRatingsTotal, hours, website, phoneNumber } = itinerary;
   const parsedHours = parseOperatingHours(hours);
   const formattedRatingsNum = Number(parseFloat(userRatingsTotal)).toLocaleString('en');
@@ -32,7 +32,7 @@ function Itinerary(props) {
                 <i id={itineraryId} className="fas fa-ellipsis-v ellipses-padding"></i>
               </a>
               <div className={itemSelectedId === itineraryId ? 'edit-delete-modal flex flex-column justify-center position-absolute position' : 'edit-delete-modal flex flex-column justify-center position-absolute position hidden'}>
-              <a onClick={props.onClick} href={`#edit-trip?itineraryId=${itineraryId}`} id="edit" className="itinerary-margin itinerary-font modal-padding hover color-black">Edit</a>
+              <a onClick={props.onClick} href={`#edit-trip?tripId=${tripId}&itineraryId=${itineraryId}`} id="edit" className="itinerary-margin itinerary-font modal-padding hover color-black">Edit</a>
                 <a id="remove" className="itinerary-margin itinerary-font modal-padding hover color-black">Remove</a>
               </div>
             </div>

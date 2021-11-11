@@ -6,9 +6,15 @@ export default class EditItineraryForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      date: null,
+      endTime: null,
       itemSelected: null,
-      itemSelectedId: null
+      itemSelectedId: null,
+      itineraryId: props.itineraryId,
+      startTime: null
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -17,11 +23,39 @@ export default class EditItineraryForm extends React.Component {
       .then(response => response.json())
       .then(itinerary => {
         this.setState({
+          date: itinerary.date,
+          endTime: itinerary.timeEnd,
           itemSelected: itinerary,
-          itemSelectedId: Number(itineraryId)
+          itemSelectedId: Number(itineraryId),
+          startTime: itinerary.timeStart
         });
       })
       .catch(err => console.error(err));
+  }
+
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const req = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    };
+    fetch('api/itinerary', req)
+      .then(res => res.json())
+      .then(result => {
+        window.location.hash = `#trip-itinerary?tripId=${this.props.tripId}`;
+      });
+
+    form.reset();
   }
 
   render() {
@@ -82,7 +116,7 @@ export default class EditItineraryForm extends React.Component {
           </div>
           <div className="row justify-space-between header-margin">
             <a className="cancel-button flex justify-center align-center" href={`#trip-itinerary?tripId=${this.props.tripId}`}>Cancel</a>
-            <button className="add-save-button poppins">Add</button>
+            <button className="add-save-button poppins">Save</button>
           </div>
         </form>
       </>

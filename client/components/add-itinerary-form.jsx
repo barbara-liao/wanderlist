@@ -26,19 +26,6 @@ export class AddItineraryForm extends React.Component {
     this.handleAutocompleteChange = this.handleAutocompleteChange.bind(this);
   }
 
-  componentDidMount() {
-    const { itineraryId } = this.props;
-    fetch(`api/itinerary/${itineraryId}`)
-      .then(response => response.json())
-      .then(itinerary => {
-        this.setState({
-          itemSelected: itinerary,
-          itemSelectedId: Number(itineraryId)
-        });
-      })
-      .catch(err => console.error(err));
-  }
-
   handleSelect(address, placeId) {
     this.setState({
       address,

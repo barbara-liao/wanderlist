@@ -36,7 +36,8 @@ export default class App extends React.Component {
       return <ItineraryPage routePath={route.path} tripId={tripId}/>;
     } else if (route.path === 'edit-trip') {
       const itineraryId = route.params.get('itineraryId');
-      return <ItineraryPage routePath={route.path} itineraryId={itineraryId} />;
+      const tripId = route.params.get('tripId');
+      return <ItineraryPage routePath={route.path} tripId={tripId} itineraryId={itineraryId} />;
     }
   }
 
