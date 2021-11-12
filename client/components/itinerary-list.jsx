@@ -5,15 +5,44 @@ import parseDate from '../lib/parse-date';
 import parseOperatingHours from '../lib/parse-operating-hours';
 import parseTime from '../lib/parse-time';
 
-function Itinerary(props) {
-  const { tripId, itemSelectedId, itemViewed, itinerary, itineraryId } = props;
-  const { name, timeStart, timeEnd, address, rating, userRatingsTotal, hours, website, phoneNumber } = itinerary;
-  const parsedHours = parseOperatingHours(hours);
-  const formattedRatingsNum = Number(parseFloat(userRatingsTotal)).toLocaleString('en');
-  return (
+class Itinerary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      notes: this.props.notes
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+  }
+
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
+  handleBlur(event) {
+    const req = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    };
+    fetch(`api/itinerary/${event.target.id}`, req)
+      .then(res => res.json())
+      .catch(err => console.error(err));
+  }
+
+  render() {
+    const { tripId, itemSelectedId, itemViewed, itinerary, itineraryId } = this.props;
+    const { name, timeStart, timeEnd, address, rating, userRatingsTotal, hours, website, phoneNumber } = itinerary;
+    const notes = this.state.notes;
+    const parsedHours = parseOperatingHours(hours);
+    const formattedRatingsNum = Number(parseFloat(userRatingsTotal)).toLocaleString('en');
+    return (
       <>
         <div className="row itinerary-card flex-column day-margin">
-          <div onClick={props.onClick} className="row itinerary-header justify-space-between">
+          <div onClick={this.props.onClick} className="row itinerary-header justify-space-between">
             <a id="display" className="col-nine-tenth margin-auto">
               <div id={itineraryId} className="flex flex-column justify-center padding-left">
                 <div id={itineraryId} className="row">
@@ -28,13 +57,13 @@ function Itinerary(props) {
               </div>
             </a>
             <div className="col-one-tenth flex justify-center align-center position-relative">
-              <a id="edit-delete" onClick={props.onClick}>
+              <a id="edit-delete" onClick={this.props.onClick}>
                 <i id={itineraryId} className="fas fa-ellipsis-v ellipses-padding"></i>
               </a>
               <div className={itemSelectedId === itineraryId
                 ? 'edit-delete-modal flex flex-column justify-center position-absolute position'
                 : 'edit-delete-modal flex flex-column justify-center position-absolute position hidden'}>
-              <a onClick={props.onClick}
+              <a onClick={this.props.onClick}
                  href={`#edit-trip?tripId=${tripId}&itineraryId=${itineraryId}`}
                  id="edit"
                  className="itinerary-margin itinerary-font modal-padding hover color-black">
@@ -46,7 +75,16 @@ function Itinerary(props) {
           </div>
           <div className={itemViewed === itineraryId ? 'itinerary-body padding-left' : 'itinerary-body padding-left hidden'}>
             <div className="row title-margin">
-              <p className="margin-none">Add notes here...</p>
+              <textarea
+                onChange={this.handleChange}
+                onBlur={this.handleBlur}
+                id={itineraryId}
+                name="notes"
+                value={notes}
+                // defaultValue={notes || ''}
+                className="note-input poppins"
+                placeholder="Add notes here...">
+              </textarea>
             </div>
               { rating && (
                 <div className="row title-margin">
@@ -88,7 +126,8 @@ function Itinerary(props) {
           </div>
         </div>
       </>
-  );
+    );
+  }
 }
 
 function Day(props) {
@@ -107,7 +146,7 @@ function Day(props) {
           const itineraryDate = parseDate(itinerary.date);
           if (date.date === itineraryDate) {
             return (
-              <Itinerary onClick={props.onClick} itineraryId={itinerary.itineraryId} key={itinerary.placeId}
+              <Itinerary onClick={props.onClick} itineraryId={itinerary.itineraryId} key={itinerary.placeId} notes={itinerary.notes}
                 itemSelected={itemSelected} itemSelectedId={itemSelectedId} itemViewed={itemViewed} tripId={tripId} itinerary={itinerary} />
             );
           } else { return null; }

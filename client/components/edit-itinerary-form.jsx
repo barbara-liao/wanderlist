@@ -41,6 +41,7 @@ export default class EditItineraryForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
+    const itineraryId = this.props.itineraryId;
     const form = event.target;
     const req = {
       method: 'PATCH',
@@ -49,7 +50,7 @@ export default class EditItineraryForm extends React.Component {
       },
       body: JSON.stringify(this.state)
     };
-    fetch('api/itinerary', req)
+    fetch(`api/itinerary/${itineraryId}`, req)
       .then(res => res.json())
       .then(result => {
         window.location.hash = `#trip-itinerary?tripId=${this.props.tripId}`;
