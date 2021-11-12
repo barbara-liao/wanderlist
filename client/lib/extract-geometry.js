@@ -1,4 +1,5 @@
 export default function extractGeometry(array) {
+  if (!array) { return null; }
   const geometryArr = [];
   for (let i = 0; i < array.length; i++) {
     const geometry = array[i].geometry

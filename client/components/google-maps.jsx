@@ -58,7 +58,7 @@ export class MapContainer extends React.Component {
         <div
           style={{
             position: 'relative',
-            height: '35rem'
+            height: '32rem'
           }}
         >
           <Map style={{}}

@@ -31,8 +31,15 @@ function Itinerary(props) {
               <a id="edit-delete" onClick={props.onClick}>
                 <i id={itineraryId} className="fas fa-ellipsis-v ellipses-padding"></i>
               </a>
-              <div className={itemSelectedId === itineraryId ? 'edit-delete-modal flex flex-column justify-center position-absolute position' : 'edit-delete-modal flex flex-column justify-center position-absolute position hidden'}>
-              <a onClick={props.onClick} href={`#edit-trip?tripId=${tripId}&itineraryId=${itineraryId}`} id="edit" className="itinerary-margin itinerary-font modal-padding hover color-black">Edit</a>
+              <div className={itemSelectedId === itineraryId
+                ? 'edit-delete-modal flex flex-column justify-center position-absolute position'
+                : 'edit-delete-modal flex flex-column justify-center position-absolute position hidden'}>
+              <a onClick={props.onClick}
+                 href={`#edit-trip?tripId=${tripId}&itineraryId=${itineraryId}`}
+                 id="edit"
+                 className="itinerary-margin itinerary-font modal-padding hover color-black">
+                   Edit
+              </a>
                 <a id="remove" className="itinerary-margin itinerary-font modal-padding hover color-black">Remove</a>
               </div>
             </div>

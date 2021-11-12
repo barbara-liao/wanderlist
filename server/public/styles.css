@@ -260,8 +260,16 @@ hr {
   }
 
   .add-button {
-    padding: 6px 13px;
-    font-size: 1.5rem;
+    padding: 3px 13px;
+    font-size: 2rem;
+    position: fixed;
+    bottom: 3rem;
+    right: 2rem;
+    z-index: 1;
+  }
+
+  .maps-button {
+    font-size: 1.15rem;
   }
 
   .itinerary-input {

@@ -1,6 +1,7 @@
 import parseAddress from './parse-address';
 
 export default function extractGeometryDetails(array) {
+  if (!array) { return null; }
   const geometryArr = [];
   for (let i = 0; i < array.length; i++) {
     const geometry = array[i].geometry
