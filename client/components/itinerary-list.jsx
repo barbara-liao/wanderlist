@@ -11,10 +11,16 @@ class Itinerary extends React.Component {
     this.state = {
       note: ''
     };
+    this.handleChange = this.handleChange.bind(this);
+  }
 
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
   render() {
+    // console.log(this.state);
     const { tripId, itemSelectedId, itemViewed, itinerary, itineraryId } = this.props;
     const { name, timeStart, timeEnd, address, rating, userRatingsTotal, hours, website, phoneNumber } = itinerary;
     const parsedHours = parseOperatingHours(hours);
@@ -55,7 +61,7 @@ class Itinerary extends React.Component {
           </div>
           <div className={itemViewed === itineraryId ? 'itinerary-body padding-left' : 'itinerary-body padding-left hidden'}>
             <div className="row title-margin">
-              <textarea className="note-input poppins" placeholder="Add notes here..."></textarea>
+              <textarea onChange={this.handleChange} name="notes" className="note-input poppins" placeholder="Add notes here..."></textarea>
             </div>
               { rating && (
                 <div className="row title-margin">
