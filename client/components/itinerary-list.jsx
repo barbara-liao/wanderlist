@@ -9,14 +9,30 @@ class Itinerary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      note: ''
+      notes: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   handleChange(event) {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+  }
+
+  handleBlur(event) {
+    // console.log(event.target);
+    const req = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    };
+    fetch(`api/itinerary/${event.target.id}`, req)
+      .then(res => res.json())
+      // .then(result => console.log(result))
+      .catch(err => console.error(err));
   }
 
   render() {
@@ -61,7 +77,14 @@ class Itinerary extends React.Component {
           </div>
           <div className={itemViewed === itineraryId ? 'itinerary-body padding-left' : 'itinerary-body padding-left hidden'}>
             <div className="row title-margin">
-              <textarea onChange={this.handleChange} name="notes" className="note-input poppins" placeholder="Add notes here..."></textarea>
+              <textarea
+                onChange={this.handleChange}
+                onBlur={this.handleBlur}
+                id={itineraryId}
+                name="notes"
+                className="note-input poppins"
+                placeholder="Add notes here...">
+              </textarea>
             </div>
               { rating && (
                 <div className="row title-margin">

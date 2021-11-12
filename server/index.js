@@ -88,6 +88,7 @@ app.get('/api/itinerary/:itineraryId', (req, res, next) => {
   if (!itineraryId) {
     throw new ClientError(400, `cannot find trip with itineraryId ${itineraryId}`);
   }
+
   const sql = `
     select "name", "date", "timeStart", "timeEnd"
       from "itinerary"
@@ -138,6 +139,28 @@ app.post('/api/itinerary', (req, res, next) => {
     .then(result => {
       const itinerary = result.rows[0];
       res.status(201).json(itinerary);
+    })
+    .catch(err => next(err));
+});
+
+app.patch('/api/itinerary/:itineraryId', (req, res, next) => {
+  const itineraryId = parseInt(req.params.itineraryId, 10);
+  const { notes } = req.body;
+  if (!notes) {
+    throw new ClientError(400, 'date, starttime, endtime and place are required fields');
+  }
+  const sql = `
+    update "itinerary"
+    set "notes" = $1
+    where "itineraryId" = $2
+    returning *`;
+
+  const params = [notes, itineraryId];
+
+  db.query(sql, params)
+    .then(result => {
+      const notes = result.rows[0];
+      res.status(201).json(notes);
     })
     .catch(err => next(err));
 });
