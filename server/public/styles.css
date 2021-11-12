@@ -67,6 +67,14 @@ hr {
   padding: 0 8px;
 }
 
+.note-input {
+  width: 80%;
+  min-height: 0.5rem;
+  overflow-y: auto;
+  border: none;
+  border-radius: 3px;
+}
+
 .form-label {
   margin: 1rem 0 0;
   font-size: 0.8rem;
