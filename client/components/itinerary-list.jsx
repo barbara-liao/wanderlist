@@ -9,7 +9,7 @@ class Itinerary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: ''
+      notes: this.props.notes
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
@@ -34,8 +34,9 @@ class Itinerary extends React.Component {
   }
 
   render() {
-    const { tripId, itemSelectedId, itemViewed, itinerary, itineraryId, notes } = this.props;
+    const { tripId, itemSelectedId, itemViewed, itinerary, itineraryId } = this.props;
     const { name, timeStart, timeEnd, address, rating, userRatingsTotal, hours, website, phoneNumber } = itinerary;
+    const notes = this.state.notes;
     const parsedHours = parseOperatingHours(hours);
     const formattedRatingsNum = Number(parseFloat(userRatingsTotal)).toLocaleString('en');
     return (
@@ -79,7 +80,8 @@ class Itinerary extends React.Component {
                 onBlur={this.handleBlur}
                 id={itineraryId}
                 name="notes"
-                defaultValue={notes || ''}
+                value={notes}
+                // defaultValue={notes || ''}
                 className="note-input poppins"
                 placeholder="Add notes here...">
               </textarea>
