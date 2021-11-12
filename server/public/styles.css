@@ -234,6 +234,10 @@ hr {
   background-color: #c0c0c0;
 }
 
+textarea:focus {
+  outline: 1px gray solid;
+}
+
 @media screen and (max-width: 576px) {
   .icon-modal {
     height: 610px;

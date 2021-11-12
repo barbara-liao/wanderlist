@@ -146,9 +146,6 @@ app.post('/api/itinerary', (req, res, next) => {
 app.patch('/api/itinerary/:itineraryId', (req, res, next) => {
   const itineraryId = parseInt(req.params.itineraryId, 10);
   const { notes } = req.body;
-  if (!notes) {
-    throw new ClientError(400, 'date, starttime, endtime and place are required fields');
-  }
   const sql = `
     update "itinerary"
     set "notes" = $1

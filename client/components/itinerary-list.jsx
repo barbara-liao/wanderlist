@@ -21,7 +21,6 @@ class Itinerary extends React.Component {
   }
 
   handleBlur(event) {
-    // console.log(event.target);
     const req = {
       method: 'PATCH',
       headers: {
@@ -31,13 +30,11 @@ class Itinerary extends React.Component {
     };
     fetch(`api/itinerary/${event.target.id}`, req)
       .then(res => res.json())
-      // .then(result => console.log(result))
       .catch(err => console.error(err));
   }
 
   render() {
-    // console.log(this.state);
-    const { tripId, itemSelectedId, itemViewed, itinerary, itineraryId } = this.props;
+    const { tripId, itemSelectedId, itemViewed, itinerary, itineraryId, notes } = this.props;
     const { name, timeStart, timeEnd, address, rating, userRatingsTotal, hours, website, phoneNumber } = itinerary;
     const parsedHours = parseOperatingHours(hours);
     const formattedRatingsNum = Number(parseFloat(userRatingsTotal)).toLocaleString('en');
@@ -82,6 +79,7 @@ class Itinerary extends React.Component {
                 onBlur={this.handleBlur}
                 id={itineraryId}
                 name="notes"
+                defaultValue={notes || ''}
                 className="note-input poppins"
                 placeholder="Add notes here...">
               </textarea>
@@ -146,7 +144,7 @@ function Day(props) {
           const itineraryDate = parseDate(itinerary.date);
           if (date.date === itineraryDate) {
             return (
-              <Itinerary onClick={props.onClick} itineraryId={itinerary.itineraryId} key={itinerary.placeId}
+              <Itinerary onClick={props.onClick} itineraryId={itinerary.itineraryId} key={itinerary.placeId} notes={itinerary.notes}
                 itemSelected={itemSelected} itemSelectedId={itemSelectedId} itemViewed={itemViewed} tripId={tripId} itinerary={itinerary} />
             );
           } else { return null; }
