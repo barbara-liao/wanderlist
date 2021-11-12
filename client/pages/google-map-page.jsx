@@ -28,7 +28,7 @@ export default class GoogleMapPage extends React.Component {
 
   render() {
     if (this.state.trip === null) { return null; }
-    // console.log(this.state);
+    const itineraries = this.state.itineraries;
     return (
       <>
         <div className="row map-header-container">
@@ -50,7 +50,7 @@ export default class GoogleMapPage extends React.Component {
             </div>
           </div>
         </div>
-        <MapContainer />
+        <MapContainer itineraries={itineraries} />
       </>
     );
   }
