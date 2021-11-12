@@ -148,7 +148,7 @@
 }
 
 .bottom-margin {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .icon-margin {
@@ -161,6 +161,10 @@
 
 .margin-left {
   margin-left: 1.5rem;
+}
+
+.window-margin {
+  margin: 0 0 8px;
 }
 
 .position-absolute {

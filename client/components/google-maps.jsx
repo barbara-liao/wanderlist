@@ -75,33 +75,21 @@ export class MapContainer extends React.Component {
                         lat: location.lat,
                         lng: location.lng
                       }}
-                      name={'Current location'}
+                      name={location.name}
+                      address={location.address}
+                      phoneNumber={location.phoneNumber}
                     />
                   );
                 })
               }
-            <Marker
-              onClick={this.onMarkerClick}
-              position={{
-                lat: 21.2820816,
-                lng: -157.7988481
-              }}
-              name={'Current location'}
-            />
-            <Marker
-              onClick={this.onMarkerClick}
-              position={{
-                lat: 21.5206575,
-                lng: -157.8372609
-              }}
-              name={'Current location'}
-            />
             <InfoWindow
               marker={this.state.activeMarker}
               visible={this.state.showingInfoWindow}
             >
-              <div>
-                <h1>{this.state.selectedPlace.name}</h1>
+              <div className="poppins">
+                <h3 className="window-margin">{this.state.selectedPlace.name}</h3>
+                <p className="itinerary-margin">{this.state.selectedPlace.address}</p>
+                <a className="itinerary-margin" href={`tel:${this.state.selectedPlace.phoneNumber}`}>{this.state.selectedPlace.phoneNumber}</a>
               </div>
             </InfoWindow>
           </Map>

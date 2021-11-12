@@ -23,7 +23,7 @@ function Itinerary(props) {
                   <p id={itineraryId}className="itinerary-margin itinerary-font">{parseTime(timeStart)} - {parseTime(timeEnd)}</p>
                 </div>
                 <div id={itineraryId} className="row">
-                  <p id={itineraryId} className="itinerary-margin itinerary-font">{parseAddress(address)}</p>
+                <p id={itineraryId} className="itinerary-margin itinerary-font">{parseAddress(address)}</p>
                 </div>
               </div>
             </a>
@@ -66,7 +66,7 @@ function Itinerary(props) {
             <div className="row title-margin">
               <i className="fas fa-globe-americas icon-detail icon-margin"></i>
               <div className="row">
-                <p className="margin-none itinerary-font">{website}</p>
+                <a className="margin-none itinerary-font" href={website}>{website}</a>
               </div>
             </div>
             )}
@@ -74,7 +74,7 @@ function Itinerary(props) {
             <div className="row title-margin">
               <i className="fas fa-phone icon-detail icon-margin"></i>
               <div className="row">
-                <p className="margin-none itinerary-font">{phoneNumber}</p>
+                <a className="margin-none itinerary-font" href={`tel:${phoneNumber}`}>{phoneNumber}</a>
               </div>
             </div>
             )}

@@ -35,7 +35,7 @@ export default class GoogleMapPage extends React.Component {
           <div className="row header-margin">
             <div className="col-one-tenth">
               <div className="row title-margin justify-center align-center">
-                <i className="fas fa-arrow-left arrow-icon"></i>
+                <a href={`#trip-itinerary?tripId=${this.props.tripId}`}><i className="fas fa-arrow-left arrow-icon color-black"></i></a>
               </div>
             </div>
             <div className="col-nine-tenth">
