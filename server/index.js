@@ -1,6 +1,7 @@
 require('dotenv/config');
 const fetch = require('node-fetch');
 const pg = require('pg');
+const argon2 = require('argon2');
 const express = require('express');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
@@ -20,6 +21,29 @@ const jsonMiddleware = express.json();
 app.use(staticMiddleware);
 
 app.use(jsonMiddleware);
+
+app.post('/api/auth/register', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(400, 'username and password are required fields');
+  }
+  argon2
+    .hash(password)
+    .then(hashedPassword => {
+      const sql = `
+        insert into "users" ("username", "hashedPassword")
+        values ($1, $2)
+        returning "userId", "username", "createdAt"
+      `;
+      const params = [username, hashedPassword];
+      return db.query(sql, params);
+    })
+    .then(result => {
+      const [user] = result.rows;
+      res.status(201).json(user);
+    })
+    .catch(err => next(err));
+});
 
 app.get('/api/trip', (req, res, next) => {
   const sql = `
