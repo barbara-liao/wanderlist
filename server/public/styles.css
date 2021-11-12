@@ -134,6 +134,15 @@ hr {
   font-size: 1.3rem;
 }
 
+.maps-button {
+  background-color: #e3913f;
+  color: white;
+  height: 42px;
+  padding: 0 8px;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
 .icon-modal {
   height: 460px;
   width: 500px;
@@ -166,6 +175,10 @@ hr {
 
 .icon-detail {
   color: #606060;
+}
+
+.arrow-icon {
+  font-size: 2rem;
 }
 
 .star-detail {
@@ -247,8 +260,16 @@ hr {
   }
 
   .add-button {
-    padding: 6px 13px;
-    font-size: 1.5rem;
+    padding: 3px 13px;
+    font-size: 2rem;
+    position: fixed;
+    bottom: 3rem;
+    right: 2rem;
+    z-index: 1;
+  }
+
+  .maps-button {
+    font-size: 1.15rem;
   }
 
   .itinerary-input {

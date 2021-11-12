@@ -10,6 +10,7 @@ export class AddItineraryForm extends React.Component {
       address: '',
       date: '',
       endTime: '',
+      geometry: '',
       hours: [],
       name: '',
       numOfRatings: null,
@@ -35,14 +36,17 @@ export class AddItineraryForm extends React.Component {
     fetch(`api/places/${placeId}`)
       .then(response => response.json())
       .then(result => {
+        // console.log(result);
         const { name, rating, website } = result.result;
         const phoneNum = result.result.formatted_phone_number;
         const hours = result.result.opening_hours.weekday_text;
         const numOfRatings = result.result.user_ratings_total;
         const adrAddress = result.result.adr_address;
+        const geometry = result.result.geometry.location;
         this.setState({
           placeId,
           address,
+          geometry,
           name,
           rating,
           website,

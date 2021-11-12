@@ -27,8 +27,18 @@
   margin: auto;
 }
 
+.map-header-container {
+  width: 40%;
+  margin: auto;
+}
+
 .itinerary-container {
   width: 35%;
+  margin: auto;
+}
+
+.map-container {
+  width: 40%;
   margin: auto;
 }
 
@@ -118,6 +128,7 @@
 
 .header-margin {
   margin: 2rem 0;
+  width: 100%;
 }
 
 .title-margin {
@@ -137,7 +148,7 @@
 }
 
 .bottom-margin {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .icon-margin {
@@ -146,6 +157,14 @@
 
 .rating-margin {
   margin: 0 3px 0 0;
+}
+
+.margin-left {
+  margin-left: 1.5rem;
+}
+
+.window-margin {
+  margin: 0 0 8px;
 }
 
 .position-absolute {
@@ -173,6 +192,10 @@
   padding: 10px 0 10px 4rem;
 }
 
+.icon-padding-left {
+  padding-left: 6px;
+}
+
 .ellipses-padding {
   padding: 12px;
 }
@@ -196,6 +219,10 @@
 
   .header-container {
     width: 90%;
+  }
+
+  .map-header-container {
+    width: 95%;
   }
 
   .itinerary-container {
@@ -232,5 +259,9 @@
 
   .padding-left {
     padding-left: 1.5rem;
+  }
+
+  .map-container {
+    width: 93%;
   }
 }

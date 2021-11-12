@@ -73,10 +73,11 @@ export default class TripItinerary extends React.Component {
           <div className="row">
             <div className="column-half header-margin">
               <h2 className="title-margin">My Itinerary</h2>
-              <p className="title-margin trip-to-font">Trip to Honolulu</p>
+              <p className="title-margin trip-to-font">Trip to {this.state.trip.destination}</p>
             </div>
             <div className="column-half flex align-center justify-end">
-              <a className="add-button" id="add" href={`#add-trip?tripId=${this.state.tripId}`}><i className="fas fa-plus"></i></a>
+              <a className="maps-button flex justify-center align-center" href={`#maps?tripId=${this.state.tripId}`}>View Map <i className="fas fa-map-marked-alt icon-padding-left"></i></a>
+              <a className="add-button margin-left" id="add" href={`#add-trip?tripId=${this.state.tripId}`}><i className="fas fa-plus"></i></a>
             </div>
           </div>
         </div>

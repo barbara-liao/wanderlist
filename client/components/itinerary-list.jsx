@@ -23,7 +23,7 @@ function Itinerary(props) {
                   <p id={itineraryId}className="itinerary-margin itinerary-font">{parseTime(timeStart)} - {parseTime(timeEnd)}</p>
                 </div>
                 <div id={itineraryId} className="row">
-                  <p id={itineraryId} className="itinerary-margin itinerary-font">{parseAddress(address)}</p>
+                <p id={itineraryId} className="itinerary-margin itinerary-font">{parseAddress(address)}</p>
                 </div>
               </div>
             </a>
@@ -31,8 +31,15 @@ function Itinerary(props) {
               <a id="edit-delete" onClick={props.onClick}>
                 <i id={itineraryId} className="fas fa-ellipsis-v ellipses-padding"></i>
               </a>
-              <div className={itemSelectedId === itineraryId ? 'edit-delete-modal flex flex-column justify-center position-absolute position' : 'edit-delete-modal flex flex-column justify-center position-absolute position hidden'}>
-              <a onClick={props.onClick} href={`#edit-trip?tripId=${tripId}&itineraryId=${itineraryId}`} id="edit" className="itinerary-margin itinerary-font modal-padding hover color-black">Edit</a>
+              <div className={itemSelectedId === itineraryId
+                ? 'edit-delete-modal flex flex-column justify-center position-absolute position'
+                : 'edit-delete-modal flex flex-column justify-center position-absolute position hidden'}>
+              <a onClick={props.onClick}
+                 href={`#edit-trip?tripId=${tripId}&itineraryId=${itineraryId}`}
+                 id="edit"
+                 className="itinerary-margin itinerary-font modal-padding hover color-black">
+                   Edit
+              </a>
                 <a id="remove" className="itinerary-margin itinerary-font modal-padding hover color-black">Remove</a>
               </div>
             </div>
@@ -66,7 +73,7 @@ function Itinerary(props) {
             <div className="row title-margin">
               <i className="fas fa-globe-americas icon-detail icon-margin"></i>
               <div className="row">
-                <p className="margin-none itinerary-font">{website}</p>
+                <a className="margin-none itinerary-font" href={website} target="_blank" rel="noreferrer">{website}</a>
               </div>
             </div>
             )}
@@ -74,7 +81,7 @@ function Itinerary(props) {
             <div className="row title-margin">
               <i className="fas fa-phone icon-detail icon-margin"></i>
               <div className="row">
-                <p className="margin-none itinerary-font">{phoneNumber}</p>
+                <a className="margin-none itinerary-font" href={`tel:${phoneNumber}`}>{phoneNumber}</a>
               </div>
             </div>
             )}
