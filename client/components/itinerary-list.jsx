@@ -73,7 +73,7 @@ function Itinerary(props) {
             <div className="row title-margin">
               <i className="fas fa-globe-americas icon-detail icon-margin"></i>
               <div className="row">
-                <a className="margin-none itinerary-font" href={website}>{website}</a>
+                <a className="margin-none itinerary-font" href={website} target="_blank" rel="noreferrer">{website}</a>
               </div>
             </div>
             )}
