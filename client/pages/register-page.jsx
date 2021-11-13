@@ -7,6 +7,30 @@ export default class RegisterPage extends React.Component {
       username: '',
       password: ''
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const req = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    };
+    fetch('/api/users/register', req)
+      .then(res => res.json())
+      .catch(err => console.error(err));
+
+    form.reset();
   }
 
   render() {
@@ -15,7 +39,7 @@ export default class RegisterPage extends React.Component {
         <div className="row justify-center align-center register-sign-in-margin">
           <h2>Register</h2>
         </div>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div className="flex justify-center align-center flex-column">
             <div>
               <input
@@ -32,7 +56,7 @@ export default class RegisterPage extends React.Component {
               <input
                 required
                 id="password"
-                type="text"
+                type="password"
                 name="password"
                 placeholder="Password"
                 onChange={this.handleChange}

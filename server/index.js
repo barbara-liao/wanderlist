@@ -22,7 +22,7 @@ app.use(staticMiddleware);
 
 app.use(jsonMiddleware);
 
-app.post('/api/auth/register', (req, res, next) => {
+app.post('/api/users/register', (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
     throw new ClientError(400, 'username and password are required fields');
@@ -31,7 +31,7 @@ app.post('/api/auth/register', (req, res, next) => {
     .hash(password)
     .then(hashedPassword => {
       const sql = `
-        insert into "users" ("username", "hashedPassword")
+        insert into "users" ("username", "password")
         values ($1, $2)
         returning "userId", "username", "createdAt"
       `;
