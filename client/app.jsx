@@ -44,8 +44,7 @@ export default class App extends React.Component {
       const tripId = route.params.get('tripId');
       return <GoogleMapPage routePath={route.path} tripId={tripId} />;
     } else if (route.path === 'register') {
-      const tripId = route.params.get('tripId');
-      return <RegisterPage routePath={route.path} tripId={tripId} />;
+      return <RegisterPage routePath={route.path} />;
     }
   }
 
