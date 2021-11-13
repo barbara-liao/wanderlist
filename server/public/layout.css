@@ -9,6 +9,11 @@
   margin: auto;
 }
 
+.register-container {
+  width: 25%;
+  margin: auto;
+}
+
 .list-container {
   background-color: #f0f0f0;
   height: 7rem;
@@ -126,6 +131,11 @@
   margin: 1rem 0 0;
 }
 
+.register-sign-in-margin {
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
 .header-margin {
   margin: 2rem 0;
   width: 100%;
@@ -165,6 +175,10 @@
 
 .window-margin {
   margin: 0 0 8px;
+}
+
+.initiate-margin {
+  margin: 1.5rem 0 0.25rem;
 }
 
 .position-absolute {

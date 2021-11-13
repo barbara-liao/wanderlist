@@ -74,7 +74,7 @@ export default class NewTrip extends React.Component {
             </div>
             <div className="flex justify-center flex-column">
               <div className="align-center margin-auto">
-                <div className="row flex-column flex-center">
+                <div className="row flex-column">
                   <div className="form-label">
                     <label htmlFor="destination">
                       Destination
@@ -92,7 +92,7 @@ export default class NewTrip extends React.Component {
                     </input>
                   </div>
                 </div>
-                <div className="row flex-column flex-center">
+                <div className="row flex-column">
                   <div className="form-label">
                     <label htmlFor="startDate">
                       Start Date
@@ -109,7 +109,7 @@ export default class NewTrip extends React.Component {
                     </input>
                   </div>
                 </div>
-                <div className="row flex-column flex-center">
+                <div className="row flex-column">
                   <div className="form-label">
                     <label htmlFor="startDate">
                       End Date
