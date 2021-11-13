@@ -245,6 +245,10 @@ hr {
   font-size: 0.85rem;
 }
 
+.account-font {
+  font-size: 0.75rem;
+}
+
 .color-black {
   color: black;
 }
@@ -282,14 +286,6 @@ textarea:focus {
     font-size: 0.8rem;
   }
 
-  .day-font {
-    font-size: 1.1rem;
-  }
-
-  .weather-font {
-    font-size: 0.8rem;
-  }
-
   .add-button {
     padding: 3px 13px;
     font-size: 2rem;
@@ -305,6 +301,22 @@ textarea:focus {
 
   .itinerary-input {
     width: 20rem;
+  }
+
+  .initiate-input {
+    width: 22rem;
+    height: 2.4rem;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 0 8px;
+  }
+
+  .day-font {
+    font-size: 1.1rem;
+  }
+
+  .weather-font {
+    font-size: 0.8rem;
   }
 
   .itinerary-font {

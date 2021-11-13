@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class RegisterPage extends React.Component {
+export default class AuthPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,10 +34,17 @@ export default class RegisterPage extends React.Component {
   }
 
   render() {
+    const action = this.props.routePath;
     return (
       <div className="register-container">
         <div className="row justify-center align-center register-sign-in-margin">
-          <h2>Register</h2>
+          <h2>
+            {
+              action === 'register'
+                ? 'Register'
+                : 'Sign In'
+            }
+          </h2>
         </div>
         <form onSubmit={this.handleSubmit}>
           <div className="flex justify-center align-center flex-column">
@@ -68,8 +75,28 @@ export default class RegisterPage extends React.Component {
                 id="register"
                 type="submit"
                 className="register-sign-in-button poppins">
-                Register
+                  {
+                    action === 'register'
+                      ? 'Register'
+                      : 'Sign In'
+                  }
               </button>
+            </div>
+            <div>
+              <p className="itinerary-margin account-font">
+                {
+                  action === 'register'
+                    ? 'Already have an account?'
+                    : "Don't have an account?"
+                }
+                <a className="auth-link-margin">
+                  {
+                    action === 'register'
+                      ? 'Sign In'
+                      : 'Sign Up'
+                  }
+                </a>
+              </p>
             </div>
           </div>
         </form>
