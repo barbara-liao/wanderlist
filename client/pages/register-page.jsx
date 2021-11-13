@@ -26,7 +26,7 @@ export default class RegisterPage extends React.Component {
       },
       body: JSON.stringify(this.state)
     };
-    fetch('/api/users/register', req)
+    fetch('/api/auth/register', req)
       .then(res => res.json())
       .catch(err => console.error(err));
 
