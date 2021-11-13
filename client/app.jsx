@@ -6,6 +6,7 @@ import ViewTrips from './pages/trips';
 import TripItinerary from './pages/trip-itinerary';
 import ItineraryPage from './pages/itinerary-page';
 import GoogleMapPage from './pages/google-map-page';
+import RegisterPage from './pages/register-page';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -42,6 +43,9 @@ export default class App extends React.Component {
     } else if (route.path === 'maps') {
       const tripId = route.params.get('tripId');
       return <GoogleMapPage routePath={route.path} tripId={tripId} />;
+    } else if (route.path === 'register') {
+      const tripId = route.params.get('tripId');
+      return <RegisterPage routePath={route.path} tripId={tripId} />;
     }
   }
 
