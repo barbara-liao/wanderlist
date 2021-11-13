@@ -1,6 +1,8 @@
 import React from 'react';
 import NewTrip from './pages/new-trip';
 import parseRoute from './lib/parse-route';
+import decodeToken from './lib/decode-token';
+import AppContext from './lib/app-context';
 import Navbar from './components/navbar';
 import ViewTrips from './pages/trips';
 import TripItinerary from './pages/trip-itinerary';
@@ -12,6 +14,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: null,
+      isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
   }
@@ -22,6 +26,9 @@ export default class App extends React.Component {
         { route: parseRoute(window.location.hash) }
       );
     });
+    const token = window.localStorage.getItem('react-context-jwt');
+    const user = token ? decodeToken(token) : null;
+    this.setState({ user, isAuthorizing: false });
   }
 
   renderPage() {
@@ -49,11 +56,17 @@ export default class App extends React.Component {
   }
 
   render() {
+    if (this.state.isAuthorizing) return null;
+    const { user, route } = this.state;
+    const { handleSignIn, handleSignOut } = this;
+    const contextValue = { user, route, handleSignIn, handleSignOut };
     return (
-      <>
-        <Navbar />
-        {this.renderPage()}
-      </>
+      <AppContext.Provider value={contextValue}>
+        <>
+          <Navbar />
+          {this.renderPage()}
+        </>
+      </AppContext.Provider>
     );
   }
 }

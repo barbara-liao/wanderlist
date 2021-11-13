@@ -32,7 +32,7 @@ app.post('/api/auth/register', (req, res, next) => {
     .hash(password)
     .then(hashedPassword => {
       const sql = `
-        insert into "users" ("username", "password")
+        insert into "users" ("username", "hashedPassword")
         values ($1, $2)
         returning "userId", "username", "createdAt"
       `;
@@ -74,7 +74,8 @@ app.post('/api/auth/sign-in', (req, res, next) => {
           const payload = { userId, username };
           const token = jwt.sign(payload, process.env.TOKEN_SECRET);
           res.json({ token, user: payload });
-        });
+        })
+        .catch(err => next(err));
     })
     .catch(err => next(err));
 });
