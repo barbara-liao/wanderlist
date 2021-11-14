@@ -163,16 +163,16 @@ app.get('/api/itinerary/:itineraryId', (req, res, next) => {
 });
 
 app.post('/api/trip', (req, res, next) => {
-  const { destination, startDate, endDate, icon } = req.body;
+  const { destination, startDate, endDate, icon, userId } = req.body;
   if (!destination || !startDate || !endDate || !icon) {
     throw new ClientError(400, 'destination, startdate, enddate and icon are required fields');
   }
   const sql = `
     insert into "trip" ("destination", "startDate", "endDate", "icon", "userId")
-        values ($1, $2, $3, $4, 1)
+        values ($1, $2, $3, $4, $5)
     returning *`;
 
-  const params = [destination, startDate, endDate, icon];
+  const params = [destination, startDate, endDate, icon, userId];
 
   db.query(sql, params)
     .then(result => {

@@ -81,7 +81,6 @@ class Itinerary extends React.Component {
                 id={itineraryId}
                 name="notes"
                 value={notes}
-                // defaultValue={notes || ''}
                 className="note-input poppins"
                 placeholder="Add notes here...">
               </textarea>

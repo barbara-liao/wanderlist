@@ -33,7 +33,7 @@ export default class App extends React.Component {
 
   renderPage() {
     const { route } = this.state;
-    if (route.path === '') {
+    if (route.path === 'new-trip') {
       return <NewTrip />;
     } else if (route.path === 'trips') {
       return <ViewTrips />;
@@ -70,3 +70,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+App.contextType = AppContext;

@@ -2,6 +2,8 @@ import React from 'react';
 import AuthForm from '../components/auth-form';
 import parseRoute from '../lib/parse-route';
 import decodeToken from '../lib/decode-token';
+import AppContext from '../lib/app-context';
+import Redirect from '../components/redirect';
 
 export default class AuthPage extends React.Component {
   constructor(props) {
@@ -38,9 +40,12 @@ export default class AuthPage extends React.Component {
   }
 
   render() {
-    const action = this.props.routePath;
+    const { user, route, handleSignIn } = this.context;
+    if (user) return <Redirect to="trips" />;
     return (
-      <AuthForm onSignIn={this.handleSignIn} action={action} />
+      <AuthForm onSignIn={handleSignIn} action={route.path} />
     );
   }
 }
+
+AuthPage.contextType = AppContext;
