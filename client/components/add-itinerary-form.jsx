@@ -20,7 +20,6 @@ export class AddItineraryForm extends React.Component {
       rating: null,
       startTime: '',
       tripId: props.tripId,
-      userId: context.user.userId,
       website: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);

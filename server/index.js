@@ -84,7 +84,7 @@ app.post('/api/auth/sign-in', (req, res, next) => {
 app.use(authorizationMiddleware);
 
 app.get('/api/users/:userId/trip', (req, res, next) => {
-  const userId = parseInt(req.params.userId, 10);
+  const { userId } = req.user;
   const sql = `
     select *
       from "trip"
@@ -170,7 +170,8 @@ app.get('/api/itinerary/:itineraryId', (req, res, next) => {
 });
 
 app.post('/api/trip', (req, res, next) => {
-  const { destination, startDate, endDate, icon, userId } = req.body;
+  const { userId } = req.user;
+  const { destination, startDate, endDate, icon } = req.body;
   if (!destination || !startDate || !endDate || !icon) {
     throw new ClientError(400, 'destination, startdate, enddate and icon are required fields');
   }
@@ -190,7 +191,8 @@ app.post('/api/trip', (req, res, next) => {
 });
 
 app.post('/api/itinerary', (req, res, next) => {
-  const { adrAddress, address, date, endTime, geometry, hours, name, numOfRatings, phoneNum, placeId, rating, startTime, tripId, userId, website } = req.body;
+  const { userId } = req.user;
+  const { adrAddress, address, date, endTime, geometry, hours, name, numOfRatings, phoneNum, placeId, rating, startTime, tripId, website } = req.body;
   if (!date || !endTime || !startTime || !address) {
     throw new ClientError(400, 'date, starttime, endtime and place are required fields');
   }

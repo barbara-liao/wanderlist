@@ -10,8 +10,7 @@ export default class NewTrip extends React.Component {
       icon: 'icons/icon-placeholder.svg',
       destination: '',
       startDate: '',
-      endDate: '',
-      userId: context.user.userId
+      endDate: ''
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
