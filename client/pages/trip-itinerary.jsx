@@ -5,7 +5,7 @@ import AppContext from '../lib/app-context';
 export default class TripItinerary extends React.Component {
   constructor(props, context) {
     super(props);
-    console.log(context);
+    // console.log(context);
     this.state = {
       weather: null,
       trip: null,

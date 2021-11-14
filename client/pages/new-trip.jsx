@@ -58,7 +58,7 @@ export default class NewTrip extends React.Component {
   }
 
   render() {
-    console.log(this.context.user);
+    // console.log(this.context.user);
     const iconImage = this.state.icon;
     return (
       <>
