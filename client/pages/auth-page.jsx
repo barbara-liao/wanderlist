@@ -13,8 +13,6 @@ export default class AuthPage extends React.Component {
       isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
-    this.handleSignIn = this.handleSignIn.bind(this);
-    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
@@ -26,17 +24,6 @@ export default class AuthPage extends React.Component {
     const token = window.localStorage.getItem('react-context-jwt');
     const user = token ? decodeToken(token) : null;
     this.setState({ user, isAuthorizing: false });
-  }
-
-  handleSignIn(result) {
-    const { user, token } = result;
-    window.localStorage.setItem('react-context-jwt', token);
-    this.setState({ user });
-  }
-
-  handleSignOut() {
-    window.localStorage.removeItem('react-context-jwt');
-    this.setState({ user: null });
   }
 
   render() {

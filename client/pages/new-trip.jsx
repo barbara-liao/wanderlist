@@ -44,7 +44,7 @@ export default class NewTrip extends React.Component {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': this.context.user
+        'x-access-token': window.localStorage.getItem('user-jwt')
       },
       body: JSON.stringify(this.state)
     };
@@ -58,7 +58,6 @@ export default class NewTrip extends React.Component {
   }
 
   render() {
-    // console.log(this.context.user);
     const iconImage = this.state.icon;
     return (
       <>

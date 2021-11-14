@@ -24,7 +24,8 @@ class Itinerary extends React.Component {
     const req = {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-access-token': window.localStorage.getItem('user-jwt')
       },
       body: JSON.stringify(this.state)
     };
@@ -80,7 +81,7 @@ class Itinerary extends React.Component {
                 onBlur={this.handleBlur}
                 id={itineraryId}
                 name="notes"
-                value={notes}
+                value={ notes || ''}
                 className="note-input poppins"
                 placeholder="Add notes here...">
               </textarea>

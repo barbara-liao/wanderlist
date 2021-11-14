@@ -1,9 +1,10 @@
 import React from 'react';
 import Autocomplete from './autocomplete';
 import { GoogleApiWrapper } from 'google-maps-react';
+import AppContext from '../lib/app-context';
 
 export class AddItineraryForm extends React.Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
     this.state = {
       adrAddress: '',
@@ -19,6 +20,7 @@ export class AddItineraryForm extends React.Component {
       rating: null,
       startTime: '',
       tripId: props.tripId,
+      userId: context.user.userId,
       website: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,10 +35,17 @@ export class AddItineraryForm extends React.Component {
       placeId
     });
 
-    fetch(`api/places/${placeId}`)
+    const req = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': window.localStorage.getItem('user-jwt')
+      }
+    };
+
+    fetch(`api/places/${placeId}`, req)
       .then(response => response.json())
       .then(result => {
-        // console.log(result);
         const { name, rating, website } = result.result;
         const phoneNum = result.result.formatted_phone_number;
         const hours = result.result.opening_hours.weekday_text;
@@ -75,7 +84,8 @@ export class AddItineraryForm extends React.Component {
     const req = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-access-token': window.localStorage.getItem('user-jwt')
       },
       body: JSON.stringify(this.state)
     };
@@ -150,3 +160,5 @@ export class AddItineraryForm extends React.Component {
 export default GoogleApiWrapper({
   apiKey: (process.env.GOOGLE_MAPS_API_KEY)
 })(AddItineraryForm);
+
+AddItineraryForm.contextType = AppContext;

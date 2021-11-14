@@ -19,7 +19,14 @@ export default class EditItineraryForm extends React.Component {
 
   componentDidMount() {
     const itineraryId = this.props.itineraryId;
-    fetch(`api/itinerary/${itineraryId}`)
+    const req = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': window.localStorage.getItem('user-jwt')
+      }
+    };
+    fetch(`api/itinerary/${itineraryId}`, req)
       .then(response => response.json())
       .then(itinerary => {
         this.setState({
@@ -40,17 +47,16 @@ export default class EditItineraryForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
-    const itineraryId = this.props.itineraryId;
     const form = event.target;
     const req = {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-access-token': window.localStorage.getItem('user-jwt')
       },
       body: JSON.stringify(this.state)
     };
-    fetch(`api/itinerary/${itineraryId}`, req)
+    fetch('api/itinerary/', req)
       .then(res => res.json())
       .then(result => {
         window.location.hash = `#trip-itinerary?tripId=${this.props.tripId}`;

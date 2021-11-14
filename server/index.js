@@ -83,12 +83,16 @@ app.post('/api/auth/sign-in', (req, res, next) => {
 
 app.use(authorizationMiddleware);
 
-app.get('/api/trip', (req, res, next) => {
+app.get('/api/users/:userId/trip', (req, res, next) => {
+  const userId = parseInt(req.params.userId, 10);
   const sql = `
     select *
       from "trip"
+      where "userId" = $1
     order by "startDate"`;
-  db.query(sql)
+
+  const param = [userId];
+  db.query(sql, param)
     .then(result => res.json(result.rows))
     .catch(err => { next(err); });
 });
@@ -186,7 +190,7 @@ app.post('/api/trip', (req, res, next) => {
 });
 
 app.post('/api/itinerary', (req, res, next) => {
-  const { adrAddress, address, date, endTime, geometry, hours, name, numOfRatings, phoneNum, placeId, rating, startTime, tripId, website } = req.body;
+  const { adrAddress, address, date, endTime, geometry, hours, name, numOfRatings, phoneNum, placeId, rating, startTime, tripId, userId, website } = req.body;
   if (!date || !endTime || !startTime || !address) {
     throw new ClientError(400, 'date, starttime, endtime and place are required fields');
   }
@@ -195,7 +199,7 @@ app.post('/api/itinerary', (req, res, next) => {
         values ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
     returning *`;
 
-  const params = [adrAddress, date, hours, name, numOfRatings, phoneNum, placeId, rating, endTime, startTime, tripId, website, geometry, 1];
+  const params = [adrAddress, date, hours, name, numOfRatings, phoneNum, placeId, rating, endTime, startTime, tripId, website, geometry, userId];
 
   db.query(sql, params)
     .then(result => {

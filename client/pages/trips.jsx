@@ -1,5 +1,6 @@
 import React from 'react';
 import TripList from '../components/trip-list';
+import AppContext from '../lib/app-context';
 
 export default class ViewTrips extends React.Component {
   constructor(props) {
@@ -11,7 +12,16 @@ export default class ViewTrips extends React.Component {
   }
 
   componentDidMount() {
-    fetch('api/trip')
+    const userId = this.context.user.userId;
+    const req = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': window.localStorage.getItem('user-jwt')
+      }
+    };
+
+    fetch(`api/users/${userId}/trip`, req)
       .then(response => response.json())
       .then(data => {
         this.setState({
@@ -37,3 +47,5 @@ export default class ViewTrips extends React.Component {
     );
   }
 }
+
+ViewTrips.contextType = AppContext;
