@@ -1,5 +1,6 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
+import Redirect from '../components/redirect';
 
 export default class NewTrip extends React.Component {
   constructor(props, context) {
@@ -57,6 +58,7 @@ export default class NewTrip extends React.Component {
   }
 
   render() {
+    if (!this.context.user) return <Redirect to="sign-in" />;
     const iconImage = this.state.icon;
     return (
       <>

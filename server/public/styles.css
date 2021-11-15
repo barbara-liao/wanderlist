@@ -253,6 +253,10 @@ hr {
   color: black;
 }
 
+.color-white {
+  color: white;
+}
+
 .hover:hover {
   background-color: #c0c0c0;
 }

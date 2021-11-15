@@ -1,4 +1,5 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
 
 export default class Navbar extends React.Component {
   constructor(props) {
@@ -9,15 +10,22 @@ export default class Navbar extends React.Component {
   }
 
   render() {
+    const { handleSignOut } = this.context;
     return (
       <>
         <div className="nav">
-          <div className="container flex">
-            <a href="#trips" className="menu flex align-center"><i className="fas fa-bars"></i></a>
+          <div className="container flex justify-space-between">
             <a href="#trips" className="logo flex align-center">WanderList</a>
+            <a onClick={handleSignOut} className="flex align-center color-white">
+              {
+                this.context.user ? 'Sign Out' : 'Sign In'
+              }
+            </a>
           </div>
         </div>
       </>
     );
   }
 }
+
+Navbar.contextType = AppContext;

@@ -1,6 +1,7 @@
 import React from 'react';
 import TripList from '../components/trip-list';
 import AppContext from '../lib/app-context';
+import Redirect from '../components/redirect';
 
 export default class ViewTrips extends React.Component {
   constructor(props) {
@@ -32,6 +33,7 @@ export default class ViewTrips extends React.Component {
   }
 
   render() {
+    if (!this.context.user) return <Redirect to="sign-in" />;
     return (
       <div className="body-container">
         <div className="row header-margin justify-space-between align-center">
