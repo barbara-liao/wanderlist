@@ -18,14 +18,14 @@ export default class TripItinerary extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`api/trip/${this.props.tripId}`)
+    fetch(`/api/trip/${this.props.tripId}`)
       .then(response => response.json())
       .then(trip => {
         this.setState({ trip });
       })
       .catch(err => console.error('Error: ', err));
 
-    fetch(`api/trip/${this.props.tripId}/itinerary`)
+    fetch(`/api/trip/${this.props.tripId}/itinerary`)
       .then(response => response.json())
       .then(itineraries => {
         this.setState({ itineraries });

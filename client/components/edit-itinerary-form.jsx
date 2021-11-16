@@ -19,7 +19,7 @@ export default class EditItineraryForm extends React.Component {
 
   componentDidMount() {
     const itineraryId = this.props.itineraryId;
-    fetch(`api/itinerary/${itineraryId}`)
+    fetch(`/api/itinerary/${itineraryId}`)
       .then(response => response.json())
       .then(itinerary => {
         this.setState({
@@ -50,7 +50,7 @@ export default class EditItineraryForm extends React.Component {
       },
       body: JSON.stringify(this.state)
     };
-    fetch(`api/itinerary/${itineraryId}`, req)
+    fetch(`/api/itinerary/${itineraryId}`, req)
       .then(res => res.json())
       .then(result => {
         window.location.hash = `#trip-itinerary?tripId=${this.props.tripId}`;

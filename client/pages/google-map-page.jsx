@@ -12,8 +12,8 @@ export default class GoogleMapPage extends React.Component {
 
   componentDidMount() {
     Promise.all([
-      fetch(`api/trip/${this.props.tripId}`),
-      fetch(`api/trip/${this.props.tripId}/itinerary`)
+      fetch(`/api/trip/${this.props.tripId}`),
+      fetch(`/api/trip/${this.props.tripId}/itinerary`)
     ])
       .then(([response1, response2]) => Promise.all([response1.json(), response2.json()]))
       .then(([trip, itineraries]) => {
