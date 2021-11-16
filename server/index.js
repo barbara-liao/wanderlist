@@ -83,7 +83,7 @@ app.post('/api/auth/sign-in', (req, res, next) => {
 
 app.use(authorizationMiddleware);
 
-app.get('/api/users/:userId/trip', (req, res, next) => {
+app.get('/api/users/:userId/trip', authorizationMiddleware, (req, res, next) => {
   const { userId } = req.user;
   const sql = `
     select *
@@ -97,7 +97,7 @@ app.get('/api/users/:userId/trip', (req, res, next) => {
     .catch(err => { next(err); });
 });
 
-app.get('/api/places/:id', (req, res, next) => {
+app.get('/api/places/:id', authorizationMiddleware, (req, res, next) => {
   const ApiKey = process.env.GOOGLE_MAPS_API_KEY_BACKEND;
   const placeId = req.params.id;
   const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name%2Cadr_address%2Crating%2Cuser_ratings_total%2Cwebsite%2Cgeometry%2Copening_hours%2Cformatted_phone_number&key=${ApiKey}`;
@@ -107,7 +107,7 @@ app.get('/api/places/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/trip/:tripId', (req, res, next) => {
+app.get('/api/trip/:tripId', authorizationMiddleware, (req, res, next) => {
   const tripId = parseInt(req.params.tripId, 10);
   if (!tripId) {
     throw new ClientError(400, 'tripId must be a positive integer');
@@ -129,7 +129,7 @@ app.get('/api/trip/:tripId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/trip/:tripId/itinerary', (req, res, next) => {
+app.get('/api/trip/:tripId/itinerary', authorizationMiddleware, (req, res, next) => {
   const tripId = parseInt(req.params.tripId, 10);
   if (!tripId) {
     throw new ClientError(400, `cannot find trip with tripId ${tripId}`);
@@ -149,7 +149,7 @@ app.get('/api/trip/:tripId/itinerary', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/itinerary/:itineraryId', (req, res, next) => {
+app.get('/api/itinerary/:itineraryId', authorizationMiddleware, (req, res, next) => {
   const itineraryId = parseInt(req.params.itineraryId, 10);
   if (!itineraryId) {
     throw new ClientError(400, `cannot find trip with itineraryId ${itineraryId}`);
@@ -169,7 +169,7 @@ app.get('/api/itinerary/:itineraryId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/trip', (req, res, next) => {
+app.post('/api/trip', authorizationMiddleware, (req, res, next) => {
   const { userId } = req.user;
   const { destination, startDate, endDate, icon } = req.body;
   if (!destination || !startDate || !endDate || !icon) {
@@ -190,7 +190,7 @@ app.post('/api/trip', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/itinerary', (req, res, next) => {
+app.post('/api/itinerary', authorizationMiddleware, (req, res, next) => {
   const { userId } = req.user;
   const { adrAddress, address, date, endTime, geometry, hours, name, numOfRatings, phoneNum, placeId, rating, startTime, tripId, website } = req.body;
   if (!date || !endTime || !startTime || !address) {
@@ -211,7 +211,7 @@ app.post('/api/itinerary', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.patch('/api/itinerary/:itineraryId', (req, res, next) => {
+app.patch('/api/itinerary/:itineraryId', authorizationMiddleware, (req, res, next) => {
   const itineraryId = parseInt(req.params.itineraryId, 10);
   const { notes } = req.body;
   const sql = `
@@ -230,7 +230,7 @@ app.patch('/api/itinerary/:itineraryId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.patch('/api/itinerary', (req, res, next) => {
+app.patch('/api/itinerary', authorizationMiddleware, (req, res, next) => {
   const { endTime, startTime, date, itineraryId } = req.body;
   if (!date || !endTime || !startTime || !itineraryId) {
     throw new ClientError(400, 'date, starttime, endtime and place are required fields');

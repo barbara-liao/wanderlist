@@ -16,6 +16,7 @@ export default class AuthPage extends React.Component {
   }
 
   componentDidMount() {
+    if (!this.context.user) { return null; }
     window.addEventListener('hashchange', () => {
       this.setState({
         route: parseRoute(window.location.hash)
