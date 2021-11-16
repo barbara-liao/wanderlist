@@ -42,7 +42,7 @@ export class AddItineraryForm extends React.Component {
       }
     };
 
-    fetch(`api/places/${placeId}`, req)
+    fetch(`/api/places/${placeId}`, req)
       .then(response => response.json())
       .then(result => {
         const { name, rating, website } = result.result;
@@ -88,7 +88,7 @@ export class AddItineraryForm extends React.Component {
       },
       body: JSON.stringify(this.state)
     };
-    fetch('api/itinerary', req)
+    fetch('/api/itinerary', req)
       .then(res => res.json())
       .then(result => {
         window.location.hash = `#trip-itinerary?tripId=${this.state.tripId}`;

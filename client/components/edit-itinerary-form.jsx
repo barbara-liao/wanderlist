@@ -56,6 +56,7 @@ export default class EditItineraryForm extends React.Component {
       },
       body: JSON.stringify(this.state)
     };
+    
     fetch('/api/itinerary/', req)
       .then(res => res.json())
       .then(result => {
