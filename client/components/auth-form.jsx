@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class RegisterPage extends React.Component {
+export default class AuthForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,6 +19,7 @@ export default class RegisterPage extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const form = event.target;
+    const { action } = this.props;
     const req = {
       method: 'POST',
       headers: {
@@ -26,18 +27,32 @@ export default class RegisterPage extends React.Component {
       },
       body: JSON.stringify(this.state)
     };
-    fetch('/api/users/register', req)
+    fetch(`/api/auth/${action}`, req)
       .then(res => res.json())
+      .then(result => {
+        if (action === 'register') {
+          window.location.hash = 'sign-in';
+        } else if (result.user && result.token) {
+          this.props.onSignIn(result);
+        }
+      })
       .catch(err => console.error(err));
 
     form.reset();
   }
 
   render() {
+    const { action } = this.props;
     return (
       <div className="register-container">
         <div className="row justify-center align-center register-sign-in-margin">
-          <h2>Register</h2>
+          <h2>
+            {
+              action === 'register'
+                ? 'Register'
+                : 'Sign In'
+            }
+          </h2>
         </div>
         <form onSubmit={this.handleSubmit}>
           <div className="flex justify-center align-center flex-column">
@@ -68,8 +83,33 @@ export default class RegisterPage extends React.Component {
                 id="register"
                 type="submit"
                 className="register-sign-in-button poppins">
-                Register
+                {
+                  action === 'register'
+                    ? 'Register'
+                    : 'Sign In'
+                }
               </button>
+            </div>
+            <div>
+              <p className="itinerary-margin account-font">
+                {
+                  action === 'register'
+                    ? 'Already have an account?'
+                    : "Don't have an account?"
+                }
+                <a className="auth-link-margin"
+                  href={
+                    action === 'register'
+                      ? '#sign-in'
+                      : '#register'
+                  }>
+                  {
+                    action === 'register'
+                      ? 'Sign In'
+                      : 'Sign Up'
+                  }
+                </a>
+              </p>
             </div>
           </div>
         </form>

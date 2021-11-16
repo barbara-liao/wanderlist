@@ -1,7 +1,9 @@
 import React from 'react';
+import AppContext from '../lib/app-context';
+import Redirect from '../components/redirect';
 
 export default class NewTrip extends React.Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
     this.state = {
       modalOpen: false,
@@ -28,12 +30,7 @@ export default class NewTrip extends React.Component {
       const iconId = event.target.id;
       const iconUrl = `icons/icon-${iconId}.svg`;
       this.setState({
-        selectedIcon: iconUrl
-      });
-    } else if (event.target.id === 'select-icon-button') {
-      const icon = this.state.selectedIcon;
-      this.setState({
-        icon: icon,
+        icon: iconUrl,
         modalOpen: false
       });
     }
@@ -41,11 +38,13 @@ export default class NewTrip extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     const form = event.target;
     const req = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-access-token': window.localStorage.getItem('user-jwt')
       },
       body: JSON.stringify(this.state)
     };
@@ -59,6 +58,7 @@ export default class NewTrip extends React.Component {
   }
 
   render() {
+    if (!this.context.user) return <Redirect to="sign-in" />;
     const iconImage = this.state.icon;
     return (
       <>
@@ -70,7 +70,7 @@ export default class NewTrip extends React.Component {
             </div>
             <div className="row justify-center align-center">
               <img src={iconImage} className="icon-image"></img>
-              <a href="#" className="icon-button" id="choose-icon" onClick={this.handleClick}>Choose an icon</a>
+              <a className="icon-button" id="choose-icon" onClick={this.handleClick}>Choose an icon</a>
             </div>
             <div className="flex justify-center flex-column">
               <div className="align-center margin-auto">
@@ -153,25 +153,22 @@ function IconPicker(props) {
     return (
       <div className="icon-modal margin-auto">
         <div className="row justify-space-between flex-wrap">
-          <a><img id="barn" className="icon" onClick={handleClick} src="icons/icon-barn.svg"></img></a>
-          <a><img id="bay" className="icon" onClick={handleClick} src="icons/icon-bay.svg"></img></a>
-          <a><img id="beach" className="icon" onClick={handleClick} src="icons/icon-beach.svg"></img></a>
-          <a><img id="camp" className="icon" onClick={handleClick} src="icons/icon-camp.svg"></img></a>
-          <a><img id="canyon" className="icon" onClick={handleClick} src="icons/icon-canyon.svg"></img></a>
-          <a><img id="city" className="icon" onClick={handleClick} src="icons/icon-city.svg"></img></a>
-          <a><img id="country" className="icon" onClick={handleClick} src="icons/icon-country.svg"></img></a>
-          <a><img id="desert" className="icon" onClick={handleClick} src="icons/icon-desert.svg"></img></a>
-          <a><img id="industrial" className="icon" onClick={handleClick} src="icons/icon-industrial.svg"></img></a>
-          <a><img id="lake" className="icon" onClick={handleClick} src="icons/icon-lake.svg"></img></a>
-          <a><img id="lighthouse" className="icon" onClick={handleClick} src="icons/icon-lighthouse.svg"></img></a>
-          <a><img id="mountain-lake" className="icon" onClick={handleClick} src="icons/icon-mountain-lake.svg"></img></a>
-          <a><img id="mountain" className="icon" onClick={handleClick} src="icons/icon-mountain.svg"></img></a>
-          <a><img id="night-lake" className="icon" onClick={handleClick} src="icons/icon-night-lake.svg"></img></a>
-          <a><img id="plateau" className="icon" onClick={handleClick} src="icons/icon-plateau.svg"></img></a>
-          <a><img id="barn" className="icon" onClick={handleClick} src="icons/icon-rural.svg"></img></a>
-        </div>
-        <div className="flex justify-end select-icon-margin">
-          <button type="submit" className="select-icon poppins" id="select-icon-button" onClick={handleClick}>Select</button>
+          <a><img type="submit" id="barn" className="icon" onClick={handleClick} src="icons/icon-barn.svg"></img></a>
+          <a><img type="submit" id="bay" className="icon" onClick={handleClick} src="icons/icon-bay.svg"></img></a>
+          <a><img type="submit" id="beach" className="icon" onClick={handleClick} src="icons/icon-beach.svg"></img></a>
+          <a><img type="submit" id="camp" className="icon" onClick={handleClick} src="icons/icon-camp.svg"></img></a>
+          <a><img type="submit" id="canyon" className="icon" onClick={handleClick} src="icons/icon-canyon.svg"></img></a>
+          <a><img type="submit" id="city" className="icon" onClick={handleClick} src="icons/icon-city.svg"></img></a>
+          <a><img type="submit" id="country" className="icon" onClick={handleClick} src="icons/icon-country.svg"></img></a>
+          <a><img type="submit" id="desert" className="icon" onClick={handleClick} src="icons/icon-desert.svg"></img></a>
+          <a><img type="submit" id="industrial" className="icon" onClick={handleClick} src="icons/icon-industrial.svg"></img></a>
+          <a><img type="submit" id="lake" className="icon" onClick={handleClick} src="icons/icon-lake.svg"></img></a>
+          <a><img type="submit" id="lighthouse" className="icon" onClick={handleClick} src="icons/icon-lighthouse.svg"></img></a>
+          <a><img type="submit" id="mountain-lake" className="icon" onClick={handleClick} src="icons/icon-mountain-lake.svg"></img></a>
+          <a><img type="submit" id="mountain" className="icon" onClick={handleClick} src="icons/icon-mountain.svg"></img></a>
+          <a><img type="submit" id="night-lake" className="icon" onClick={handleClick} src="icons/icon-night-lake.svg"></img></a>
+          <a><img type="submit" id="plateau" className="icon" onClick={handleClick} src="icons/icon-plateau.svg"></img></a>
+          <a><img type="submit" id="barn" className="icon" onClick={handleClick} src="icons/icon-rural.svg"></img></a>
         </div>
       </div>
     );
@@ -179,3 +176,5 @@ function IconPicker(props) {
     return null;
   }
 }
+
+NewTrip.contextType = AppContext;

@@ -42,7 +42,7 @@ module.exports = {
       '/api': `http://localhost:${process.env.PORT}`
     }
   },
-  stats: 'summary',
+  stats: 'minimal',
   performance: {
     hints: false
   },

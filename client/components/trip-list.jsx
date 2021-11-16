@@ -27,11 +27,7 @@ function Trip(props) {
 
 function TripList(props) {
   return (
-    <div className="body-container">
-      <div className="row header-margin justify-space-between align-center">
-        <h2>My Trips</h2>
-        <a className="new-trip-button flex justify-center align-center poppins" href="#">New Trip</a>
-      </div>
+    <>
       {
         props.trips.map(trip => {
           return (
@@ -42,7 +38,7 @@ function TripList(props) {
           );
         })
       }
-    </div>
+    </>
   );
 }
 

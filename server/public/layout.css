@@ -7,6 +7,7 @@
 .body-container {
   width: 30%;
   margin: auto;
+  height: 100%;
 }
 
 .register-container {
@@ -124,7 +125,7 @@
 }
 
 .plan-button-margin {
-  margin: 2rem;
+  margin-top: 2rem;
 }
 
 .select-icon-margin {
@@ -171,6 +172,10 @@
 
 .margin-left {
   margin-left: 1.5rem;
+}
+
+.auth-link-margin {
+  margin-left: 4px;
 }
 
 .window-margin {
@@ -220,6 +225,10 @@
 
 @media screen and (max-width: 576px) {
   .container {
+    width: 100%;
+  }
+
+  .register-container {
     width: 100%;
   }
 

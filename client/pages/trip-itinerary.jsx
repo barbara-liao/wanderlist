@@ -1,8 +1,9 @@
 import React from 'react';
 import ItineraryList from '../components/itinerary-list';
+import AppContext from '../lib/app-context';
 
 export default class TripItinerary extends React.Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
     this.state = {
       weather: null,
@@ -18,14 +19,22 @@ export default class TripItinerary extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/trip/${this.props.tripId}`)
+    const req = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': window.localStorage.getItem('user-jwt')
+      }
+    };
+
+    fetch(`/api/trip/${this.props.tripId}`, req)
       .then(response => response.json())
       .then(trip => {
         this.setState({ trip });
       })
       .catch(err => console.error('Error: ', err));
 
-    fetch(`/api/trip/${this.props.tripId}/itinerary`)
+    fetch(`/api/trip/${this.props.tripId}/itinerary`, req)
       .then(response => response.json())
       .then(itineraries => {
         this.setState({ itineraries });
@@ -86,3 +95,5 @@ export default class TripItinerary extends React.Component {
     );
   }
 }
+
+TripItinerary.contextType = AppContext;
