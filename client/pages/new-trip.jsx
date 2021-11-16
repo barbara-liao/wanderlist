@@ -48,7 +48,7 @@ export default class NewTrip extends React.Component {
       },
       body: JSON.stringify(this.state)
     };
-    fetch('api/trip', req)
+    fetch('/api/trip', req)
       .then(res => res.json())
       .then(result => {
         window.location.hash = '#trips';
