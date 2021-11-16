@@ -1,7 +1,6 @@
 import React from 'react';
 import AuthForm from '../components/auth-form';
 import parseRoute from '../lib/parse-route';
-import decodeToken from '../lib/decode-token';
 import AppContext from '../lib/app-context';
 import Redirect from '../components/redirect';
 
@@ -13,18 +12,6 @@ export default class AuthPage extends React.Component {
       isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
-  }
-
-  componentDidMount() {
-    if (!this.context.user) { return null; }
-    window.addEventListener('hashchange', () => {
-      this.setState({
-        route: parseRoute(window.location.hash)
-      });
-    });
-    const token = window.localStorage.getItem('react-context-jwt');
-    const user = token ? decodeToken(token) : null;
-    this.setState({ user, isAuthorizing: false });
   }
 
   render() {

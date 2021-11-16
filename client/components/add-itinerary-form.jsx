@@ -42,7 +42,7 @@ export class AddItineraryForm extends React.Component {
       }
     };
 
-    fetch(`api/places/${placeId}`, req)
+    fetch(`/api/places/${placeId}`, req)
       .then(response => response.json())
       .then(result => {
         const { name, rating, website } = result.result;

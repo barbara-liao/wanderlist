@@ -13,7 +13,6 @@ export default class ViewTrips extends React.Component {
   }
 
   componentDidMount() {
-    const userId = this.context.user.userId;
     const req = {
       method: 'GET',
       headers: {
@@ -22,7 +21,7 @@ export default class ViewTrips extends React.Component {
       }
     };
 
-    fetch(`/api/users/${userId}/trip`, req)
+    fetch('/api/trips', req)
       .then(response => response.json())
       .then(data => {
         this.setState({

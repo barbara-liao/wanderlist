@@ -83,7 +83,7 @@ app.post('/api/auth/sign-in', (req, res, next) => {
 
 app.use(authorizationMiddleware);
 
-app.get('/api/users/:userId/trip', authorizationMiddleware, (req, res, next) => {
+app.get('/api/trips', authorizationMiddleware, (req, res, next) => {
   const { userId } = req.user;
   const sql = `
     select *
@@ -97,7 +97,7 @@ app.get('/api/users/:userId/trip', authorizationMiddleware, (req, res, next) => 
     .catch(err => { next(err); });
 });
 
-app.get('/api/places/:id', authorizationMiddleware, (req, res, next) => {
+app.get('/api/places/:id', (req, res, next) => {
   const ApiKey = process.env.GOOGLE_MAPS_API_KEY_BACKEND;
   const placeId = req.params.id;
   const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name%2Cadr_address%2Crating%2Cuser_ratings_total%2Cwebsite%2Cgeometry%2Copening_hours%2Cformatted_phone_number&key=${ApiKey}`;
@@ -109,15 +109,17 @@ app.get('/api/places/:id', authorizationMiddleware, (req, res, next) => {
 
 app.get('/api/trip/:tripId', authorizationMiddleware, (req, res, next) => {
   const tripId = parseInt(req.params.tripId, 10);
+  const { userId } = req.user;
   if (!tripId) {
     throw new ClientError(400, 'tripId must be a positive integer');
   }
   const sql = `
     select *
       from "trip"
-     where "tripId" = $1`;
+     where "tripId" = $1 and
+           "userId" = $2`;
 
-  const params = [tripId];
+  const params = [tripId, userId];
 
   db.query(sql, params)
     .then(result => {
@@ -131,16 +133,18 @@ app.get('/api/trip/:tripId', authorizationMiddleware, (req, res, next) => {
 
 app.get('/api/trip/:tripId/itinerary', authorizationMiddleware, (req, res, next) => {
   const tripId = parseInt(req.params.tripId, 10);
+  const { userId } = req.user;
   if (!tripId) {
     throw new ClientError(400, `cannot find trip with tripId ${tripId}`);
   }
   const sql = `
     select *
      from "itinerary"
-    where "tripId" = $1
+    where "tripId" = $1 and
+          "userId" = $2
     order by "timeStart"`;
 
-  const params = [tripId];
+  const params = [tripId, userId];
 
   db.query(sql, params)
     .then(result => {
@@ -150,6 +154,7 @@ app.get('/api/trip/:tripId/itinerary', authorizationMiddleware, (req, res, next)
 });
 
 app.get('/api/itinerary/:itineraryId', authorizationMiddleware, (req, res, next) => {
+  const { userId } = req.user;
   const itineraryId = parseInt(req.params.itineraryId, 10);
   if (!itineraryId) {
     throw new ClientError(400, `cannot find trip with itineraryId ${itineraryId}`);
@@ -158,9 +163,10 @@ app.get('/api/itinerary/:itineraryId', authorizationMiddleware, (req, res, next)
   const sql = `
     select "name", "date", "timeStart", "timeEnd"
       from "itinerary"
-     where "itineraryId" = $1`;
+     where "itineraryId" = $1 and
+           "userId" = $2`;
 
-  const params = [itineraryId];
+  const params = [itineraryId, userId];
 
   db.query(sql, params)
     .then(result => {
@@ -212,15 +218,17 @@ app.post('/api/itinerary', authorizationMiddleware, (req, res, next) => {
 });
 
 app.patch('/api/itinerary/:itineraryId', authorizationMiddleware, (req, res, next) => {
+  const { userId } = req.user;
   const itineraryId = parseInt(req.params.itineraryId, 10);
   const { notes } = req.body;
   const sql = `
     update "itinerary"
     set "notes" = $1
-    where "itineraryId" = $2
+    where "itineraryId" = $2 and
+          "userId" = $3
     returning *`;
 
-  const params = [notes, itineraryId];
+  const params = [notes, itineraryId, userId];
 
   db.query(sql, params)
     .then(result => {
@@ -231,6 +239,7 @@ app.patch('/api/itinerary/:itineraryId', authorizationMiddleware, (req, res, nex
 });
 
 app.patch('/api/itinerary', authorizationMiddleware, (req, res, next) => {
+  const { userId } = req.user;
   const { endTime, startTime, date, itineraryId } = req.body;
   if (!date || !endTime || !startTime || !itineraryId) {
     throw new ClientError(400, 'date, starttime, endtime and place are required fields');
@@ -240,10 +249,11 @@ app.patch('/api/itinerary', authorizationMiddleware, (req, res, next) => {
        set "date" = $1,
            "timeStart" = $2,
            "timeEnd" = $3
-     where "itineraryId" = $4
+     where "itineraryId" = $4 and
+           "userId" = $5
      returning *`;
 
-  const params = [date, startTime, endTime, itineraryId];
+  const params = [date, startTime, endTime, itineraryId, userId];
 
   db.query(sql, params)
     .then(result => {
