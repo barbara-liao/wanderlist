@@ -11,7 +11,7 @@ export default class ViewTrips extends React.Component {
   }
 
   componentDidMount() {
-    fetch('api/trip')
+    fetch('/api/trip')
       .then(response => response.json())
       .then(data => {
         this.setState({

@@ -28,7 +28,7 @@ class Itinerary extends React.Component {
       },
       body: JSON.stringify(this.state)
     };
-    fetch(`api/itinerary/${event.target.id}`, req)
+    fetch(`/api/itinerary/${event.target.id}`, req)
       .then(res => res.json())
       .catch(err => console.error(err));
   }
