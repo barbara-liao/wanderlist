@@ -26,7 +26,7 @@ export default class EditItineraryForm extends React.Component {
         'x-access-token': window.localStorage.getItem('user-jwt')
       }
     };
-    fetch(`api/itinerary/${itineraryId}`, req)
+    fetch(`/api/itinerary/${itineraryId}`, req)
       .then(response => response.json())
       .then(itinerary => {
         this.setState({
@@ -56,7 +56,7 @@ export default class EditItineraryForm extends React.Component {
       },
       body: JSON.stringify(this.state)
     };
-    fetch('api/itinerary/', req)
+    fetch('/api/itinerary/', req)
       .then(res => res.json())
       .then(result => {
         window.location.hash = `#trip-itinerary?tripId=${this.props.tripId}`;

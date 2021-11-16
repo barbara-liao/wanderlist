@@ -22,7 +22,7 @@ export default class ViewTrips extends React.Component {
       }
     };
 
-    fetch(`api/users/${userId}/trip`, req)
+    fetch(`/api/users/${userId}/trip`, req)
       .then(response => response.json())
       .then(data => {
         this.setState({
