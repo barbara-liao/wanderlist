@@ -14,7 +14,7 @@ export default class Navbar extends React.Component {
     return (
       <>
         <div className="nav">
-          <div className="container flex justify-space-between">
+          <div className="body-container flex justify-space-between">
             <a href="#trips" className="logo flex align-center">WanderList</a>
             <a onClick={handleSignOut} className="flex align-center color-white">
               {
