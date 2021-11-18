@@ -23,8 +23,8 @@ CREATE TABLE "itinerary" (
 	"itineraryId" serial NOT NULL,
 	"name" TEXT NOT NULL,
 	"address" TEXT NOT NULL,
-	"timeStart" TIME NOT NULL,
-	"timeEnd" TIME NOT NULL,
+	"timeStart" TEXT NOT NULL,
+	"timeEnd" TEXT NOT NULL,
 	"website" TEXT,
 	"phoneNumber" TEXT,
 	"notes" TEXT,
@@ -45,8 +45,8 @@ CREATE TABLE "itinerary" (
 
 CREATE TABLE "trip" (
 	"destination" TEXT NOT NULL,
-	"startDate" DATE NOT NULL,
-	"endDate" DATE NOT NULL,
+	"startDate" timestamptz(0) NOT NULL,
+	"endDate" timestamptz(0) NOT NULL,
 	"icon" TEXT NOT NULL,
 	"userId" integer NOT NULL,
 	"tripId" serial NOT NULL UNIQUE,
