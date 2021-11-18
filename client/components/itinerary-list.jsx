@@ -39,6 +39,7 @@ class Itinerary extends React.Component {
     const { name, timeStart, timeEnd, address, rating, userRatingsTotal, hours, website, phoneNumber } = itinerary;
     const notes = this.state.notes;
     const parsedHours = parseOperatingHours(hours);
+    const parsedAddress = parseAddress(address);
     const formattedRatingsNum = Number(parseFloat(userRatingsTotal)).toLocaleString('en');
     return (
       <>
@@ -53,7 +54,7 @@ class Itinerary extends React.Component {
                   <p id={itineraryId}className="itinerary-margin itinerary-font">{parseTime(timeStart)} - {parseTime(timeEnd)}</p>
                 </div>
                 <div id={itineraryId} className="row">
-                <p id={itineraryId} className="itinerary-margin itinerary-font">{parseAddress(address)}</p>
+                <p id={itineraryId} className="itinerary-margin itinerary-font">{parsedAddress}</p>
                 </div>
               </div>
             </a>
@@ -96,15 +97,17 @@ class Itinerary extends React.Component {
                 </div>
               )}
             <div className="row title-margin">
-              <i className="fas fa-clock icon-detail icon-margin"></i>
+              { parsedHours && (
+                <i className="fas fa-clock icon-detail icon-margin"></i>
+              )}
               <div>
-                {
+                { parsedHours && (
                   parsedHours.map(hour => {
                     return (
                       <p key={hour} className="margin-none itinerary-font">{hour}</p>
                     );
                   })
-                }
+                )}
               </div>
             </div>
             { website && (

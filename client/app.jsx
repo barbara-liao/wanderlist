@@ -47,7 +47,9 @@ export default class App extends React.Component {
 
   renderPage() {
     const { route } = this.state;
-    if (route.path === 'new-trip') {
+    if (route.path === '') {
+      return <AuthPage routePath={route.path} />;
+    } else if (route.path === 'new-trip') {
       return <NewTrip />;
     } else if (route.path === 'trips') {
       return <ViewTrips />;
