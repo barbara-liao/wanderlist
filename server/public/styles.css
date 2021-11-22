@@ -1,3 +1,4 @@
+button,
 a {
   text-decoration: none;
   cursor: pointer;
@@ -95,7 +96,6 @@ hr {
   border-radius: 5px;
   margin: 5px;
   font-size: 0.85rem;
-  cursor: pointer;
 }
 
 .plan-button {
@@ -106,7 +106,6 @@ hr {
   height: 2.3rem;
   font-size: 0.9rem;
   border: none;
-  cursor: pointer;
 }
 
 .register-sign-in-button {
@@ -117,7 +116,6 @@ hr {
   height: 2.3rem;
   font-size: 0.9rem;
   border: none;
-  cursor: pointer;
 }
 
 .new-trip-button {
@@ -128,7 +126,6 @@ hr {
   height: 2.3rem;
   font-size: 0.9rem;
   border: none;
-  cursor: pointer;
 }
 
 .add-save-button {
@@ -139,7 +136,6 @@ hr {
   height: 30px;
   font-size: 0.9rem;
   border: none;
-  cursor: pointer;
 }
 
 .cancel-button {
@@ -150,7 +146,6 @@ hr {
   height: 30px;
   font-size: 0.9rem;
   border: none;
-  cursor: pointer;
 }
 
 .add-button {
@@ -195,7 +190,6 @@ hr {
 .icon {
   width: 80px;
   height: 80px;
-  cursor: pointer;
   border-radius: 50%;
   margin: 2px 5px;
 }
@@ -220,7 +214,6 @@ hr {
   width: 5rem;
   border: none;
   border-radius: 3px;
-  cursor: pointer;
 }
 
 .trip-list {
@@ -263,67 +256,4 @@ hr {
 
 textarea:focus {
   outline: 1px gray solid;
-}
-
-@media screen and (max-width: 576px) {
-  .icon-modal {
-    height: 595px;
-    width: 345px;
-    padding: 20px 10px;
-  }
-
-  .icon {
-    width: 80px;
-    height: 80px;
-  }
-
-  .icon-image {
-    height: 60px;
-    width: 60px;
-  }
-
-  .destination {
-    font-size: 0.9rem;
-  }
-
-  .date-range {
-    font-size: 0.8rem;
-  }
-
-  .add-button {
-    padding: 3px 13px;
-    font-size: 2rem;
-    position: fixed;
-    bottom: 3rem;
-    right: 2rem;
-    z-index: 1;
-  }
-
-  .maps-button {
-    font-size: 1.15rem;
-  }
-
-  .itinerary-input {
-    width: 20rem;
-  }
-
-  .initiate-input {
-    width: 22rem;
-    height: 2.4rem;
-    border-radius: 5px;
-    border: 1px solid gray;
-    padding: 0 8px;
-  }
-
-  .day-font {
-    font-size: 1.1rem;
-  }
-
-  .weather-font {
-    font-size: 0.8rem;
-  }
-
-  .itinerary-font {
-    font-size: 0.75rem;
-  }
 }
