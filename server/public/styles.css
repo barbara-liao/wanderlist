@@ -98,6 +98,10 @@ hr {
   font-size: 0.85rem;
 }
 
+.icon-button:hover {
+  background-color: #679ea0;
+}
+
 .plan-button {
   background-color: #e3913f;
   color: white;
@@ -106,6 +110,10 @@ hr {
   height: 2.3rem;
   font-size: 0.9rem;
   border: none;
+}
+
+.plan-button:hover {
+  background-color: #d3873b;
 }
 
 .register-sign-in-button {
@@ -118,6 +126,10 @@ hr {
   border: none;
 }
 
+.register-sign-in-button:hover {
+  background-color: #d3873b;
+}
+
 .new-trip-button {
   background-color: #e3913f;
   color: white;
@@ -126,6 +138,10 @@ hr {
   height: 2.3rem;
   font-size: 0.9rem;
   border: none;
+}
+
+.new-trip-button:hover {
+  background-color: #d3873b;
 }
 
 .add-save-button {
@@ -138,6 +154,10 @@ hr {
   border: none;
 }
 
+.add-save-button:hover {
+  background-color: #d3873b;
+}
+
 .cancel-button {
   background-color: #e3913f;
   color: white;
@@ -148,12 +168,20 @@ hr {
   border: none;
 }
 
+.cancel-button:hover {
+  background-color: #d3873b;
+}
+
 .add-button {
   background-color: #e3913f;
   color: white;
   padding: 5.6px 13px;
   border-radius: 50%;
   font-size: 1.3rem;
+}
+
+.add-button:hover {
+  background-color: #d3873b;
 }
 
 .maps-button {
@@ -163,6 +191,10 @@ hr {
   padding: 0 8px;
   border-radius: 10px;
   font-size: 1rem;
+}
+
+.maps-button:hover {
+  background-color: #d3873b;
 }
 
 .icon-modal {
@@ -256,4 +288,8 @@ hr {
 
 textarea:focus {
   outline: 1px gray solid;
+}
+
+button:hover {
+  background-color: #c48a2e;
 }

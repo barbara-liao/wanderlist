@@ -5,7 +5,7 @@
 }
 
 .body-container {
-  width: 30%;
+  max-width: 672px;
   margin: auto;
   height: 100%;
 }
@@ -29,7 +29,7 @@
 }
 
 .header-container {
-  width: 35%;
+  max-width: 672px;
   margin: auto;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .itinerary-container {
-  width: 35%;
+  max-width: 672px;
   margin: auto;
 }
 
@@ -56,7 +56,7 @@
 .itinerary-header {
   background-color: #f0f0f0;
   border-radius: 3px;
-  height: 8rem;
+  min-height: 8rem;
 }
 
 .itinerary-body {
@@ -223,6 +223,24 @@
   padding: 0 10px;
 }
 
+.list-container:hover {
+  background-color: #dfdfdf;
+}
+
+@media screen and (max-width: 727px) {
+  .body-container {
+    margin: auto 27px;
+  }
+
+  .itinerary-container {
+    margin: auto 27px;
+  }
+
+  .header-container {
+    margin: auto 27px;
+  }
+}
+
 @media screen and (max-width: 576px) {
   .container {
     width: 100%;
@@ -287,9 +305,7 @@
   .map-container {
     width: 93%;
   }
-}
 
-@media screen and (max-width: 576px) {
   .icon-modal {
     height: 595px;
     width: 345px;
