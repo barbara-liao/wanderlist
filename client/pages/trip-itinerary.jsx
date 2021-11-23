@@ -1,5 +1,6 @@
 import React from 'react';
 import ItineraryList from '../components/itinerary-list';
+import Spinner from '../components/spinner';
 import AppContext from '../lib/app-context';
 
 export default class TripItinerary extends React.Component {
@@ -110,20 +111,7 @@ export default class TripItinerary extends React.Component {
               </div>
             : (
                 loading
-                  ? <div className="lds-default margin-auto">
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                    </div>
+                  ? <Spinner />
                   : <ItineraryList onClick={this.handleClick} trips={this.state} />
               )
         }

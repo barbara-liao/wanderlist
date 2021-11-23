@@ -2,6 +2,7 @@ import React from 'react';
 import TripList from '../components/trip-list';
 import AppContext from '../lib/app-context';
 import Redirect from '../components/redirect';
+import Spinner from '../components/spinner';
 
 export default class ViewTrips extends React.Component {
   constructor(props) {
@@ -56,20 +57,7 @@ export default class ViewTrips extends React.Component {
               </div>
               : (
                   loading
-                    ? <div className="lds-default margin-auto">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                      </div>
+                    ? <Spinner />
                     : (
                         this.state.trips.length === 0
                           ? <p className="flex justify-center">No trips. Add a new trip!</p>
