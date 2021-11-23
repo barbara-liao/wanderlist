@@ -14,7 +14,8 @@ export default class TripItinerary extends React.Component {
       itemSelected: null,
       action: '',
       tripId: this.props.tripId,
-      loading: false
+      loading: false,
+      error: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -36,6 +37,7 @@ export default class TripItinerary extends React.Component {
         this.setState({ trip });
       })
       .catch(err => {
+        this.setState({ error: true });
         console.error('Error: ', err);
       });
 
@@ -46,6 +48,7 @@ export default class TripItinerary extends React.Component {
         this.setState({ itineraries });
       })
       .catch(err => {
+        this.setState({ error: true });
         console.error('Error: ', err);
       });
   }
@@ -84,7 +87,7 @@ export default class TripItinerary extends React.Component {
 
   render() {
     if (this.state.trip === null) { return null; }
-    const loading = this.state.loading;
+    const { loading, error } = this.state;
     return (
       <>
         <div className="header-container">
@@ -100,22 +103,29 @@ export default class TripItinerary extends React.Component {
           </div>
         </div>
         {
-          loading
-            ? <div className="lds-default margin-auto">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+          error
+            ? <div className="flex flex-column margin-auto">
+                <p className="flex margin-auto">Something went wrong with the request.</p>
+                <p className="flex margin-auto"> Please try again later!</p>
               </div>
-            : <ItineraryList onClick={this.handleClick} trips={this.state} />
+            : (
+                loading
+                  ? <div className="lds-default margin-auto">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  : <ItineraryList onClick={this.handleClick} trips={this.state} />
+              )
         }
       </>
     );

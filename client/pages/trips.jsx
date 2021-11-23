@@ -9,7 +9,8 @@ export default class ViewTrips extends React.Component {
     this.state = {
       trips: [],
       tripId: null,
-      loading: false
+      loading: false,
+      error: false
     };
   }
 
@@ -32,12 +33,15 @@ export default class ViewTrips extends React.Component {
           loading: false
         });
       })
-      .catch(err => console.error('Error: ', err));
+      .catch(err => {
+        this.setState({ error: true });
+        console.error('Error: ', err);
+      });
   }
 
   render() {
     if (!this.context.user) return <Redirect to="sign-in" />;
-    const loading = this.state.loading;
+    const { loading, error } = this.state;
     return (
       <div className="body-container">
         <div className="row header-margin justify-space-between align-center">
@@ -45,25 +49,32 @@ export default class ViewTrips extends React.Component {
           <a className="new-trip-button flex justify-center align-center poppins" href="#new-trip">New Trip</a>
         </div>
           {
-            loading
-              ? <div className="lds-default margin-auto">
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                </div>
+            error
+              ? <div className="flex flex-column margin-auto">
+                <p className="flex margin-auto">Something went wrong with the request.</p>
+                <p className="flex margin-auto"> Please try again later!</p>
+              </div>
               : (
-                  this.state.trips.length === 0
-                    ? <p className="flex justify-center">No trips. Add a new trip!</p>
-                    : <TripList trips={this.state.trips} />
+                  loading
+                    ? <div className="lds-default margin-auto">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                    : (
+                        this.state.trips.length === 0
+                          ? <p className="flex justify-center">No trips. Add a new trip!</p>
+                          : <TripList trips={this.state.trips} />
+                      )
                 )
           }
       </div>
