@@ -1,5 +1,6 @@
 import React from 'react';
 import ItineraryList from '../components/itinerary-list';
+import Spinner from '../components/spinner';
 import AppContext from '../lib/app-context';
 
 export default class TripItinerary extends React.Component {
@@ -13,12 +14,16 @@ export default class TripItinerary extends React.Component {
       itemSelectedId: null,
       itemSelected: null,
       action: '',
-      tripId: this.props.tripId
+      tripId: this.props.tripId,
+      loading: false,
+      error: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
+    this.setState({ loading: true });
+
     const req = {
       method: 'GET',
       headers: {
@@ -32,14 +37,21 @@ export default class TripItinerary extends React.Component {
       .then(trip => {
         this.setState({ trip });
       })
-      .catch(err => console.error('Error: ', err));
+      .catch(err => {
+        this.setState({ error: true });
+        console.error('Error: ', err);
+      });
 
     fetch(`/api/trip/${this.props.tripId}/itinerary`, req)
       .then(response => response.json())
       .then(itineraries => {
+        this.setState({ loading: false });
         this.setState({ itineraries });
       })
-      .catch(err => console.error('Error: ', err));
+      .catch(err => {
+        this.setState({ error: true });
+        console.error('Error: ', err);
+      });
   }
 
   handleClick(event) {
@@ -76,6 +88,7 @@ export default class TripItinerary extends React.Component {
 
   render() {
     if (this.state.trip === null) { return null; }
+    const { loading, error } = this.state;
     return (
       <>
         <div className="header-container">
@@ -90,7 +103,18 @@ export default class TripItinerary extends React.Component {
             </div>
           </div>
         </div>
-        <ItineraryList onClick={this.handleClick} trips={this.state} />
+        {
+          error
+            ? <div className="flex flex-column margin-auto">
+                <p className="flex margin-auto">Something went wrong with the request.</p>
+                <p className="flex margin-auto"> Please try again later!</p>
+              </div>
+            : (
+                loading
+                  ? <Spinner />
+                  : <ItineraryList onClick={this.handleClick} trips={this.state} />
+              )
+        }
       </>
     );
   }
