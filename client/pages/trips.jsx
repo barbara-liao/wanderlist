@@ -8,11 +8,14 @@ export default class ViewTrips extends React.Component {
     super(props);
     this.state = {
       trips: [],
-      tripId: null
+      tripId: null,
+      loading: false
     };
   }
 
   componentDidMount() {
+    this.setState({ loading: true });
+
     const req = {
       method: 'GET',
       headers: {
@@ -25,7 +28,8 @@ export default class ViewTrips extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({
-          trips: data
+          trips: data,
+          loading: false
         });
       })
       .catch(err => console.error('Error: ', err));
@@ -33,6 +37,7 @@ export default class ViewTrips extends React.Component {
 
   render() {
     if (!this.context.user) return <Redirect to="sign-in" />;
+    const loading = this.state.loading;
     return (
       <div className="body-container">
         <div className="row header-margin justify-space-between align-center">
@@ -40,9 +45,26 @@ export default class ViewTrips extends React.Component {
           <a className="new-trip-button flex justify-center align-center poppins" href="#new-trip">New Trip</a>
         </div>
           {
-            this.state.trips.length === 0
-              ? <p className="flex justify-center">No trips. Add a new trip!</p>
-              : <TripList trips={this.state.trips} />
+            loading
+              ? <div className="lds-default margin-auto">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              : (
+                  this.state.trips.length === 0
+                    ? <p className="flex justify-center">No trips. Add a new trip!</p>
+                    : <TripList trips={this.state.trips} />
+                )
           }
       </div>
     );

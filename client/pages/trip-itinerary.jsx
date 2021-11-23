@@ -13,12 +13,15 @@ export default class TripItinerary extends React.Component {
       itemSelectedId: null,
       itemSelected: null,
       action: '',
-      tripId: this.props.tripId
+      tripId: this.props.tripId,
+      loading: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
+    this.setState({ loading: true });
+
     const req = {
       method: 'GET',
       headers: {
@@ -32,14 +35,19 @@ export default class TripItinerary extends React.Component {
       .then(trip => {
         this.setState({ trip });
       })
-      .catch(err => console.error('Error: ', err));
+      .catch(err => {
+        console.error('Error: ', err);
+      });
 
     fetch(`/api/trip/${this.props.tripId}/itinerary`, req)
       .then(response => response.json())
       .then(itineraries => {
+        this.setState({ loading: false });
         this.setState({ itineraries });
       })
-      .catch(err => console.error('Error: ', err));
+      .catch(err => {
+        console.error('Error: ', err);
+      });
   }
 
   handleClick(event) {
@@ -76,6 +84,7 @@ export default class TripItinerary extends React.Component {
 
   render() {
     if (this.state.trip === null) { return null; }
+    const loading = this.state.loading;
     return (
       <>
         <div className="header-container">
@@ -90,7 +99,24 @@ export default class TripItinerary extends React.Component {
             </div>
           </div>
         </div>
-        <ItineraryList onClick={this.handleClick} trips={this.state} />
+        {
+          loading
+            ? <div className="lds-default margin-auto">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            : <ItineraryList onClick={this.handleClick} trips={this.state} />
+        }
       </>
     );
   }

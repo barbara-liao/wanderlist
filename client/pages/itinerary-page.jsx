@@ -21,7 +21,7 @@ export default class ItineraryPage extends React.Component {
           {
             this.props.routePath === 'add-trip'
               ? (
-              <AddItineraryForm routePath={this.props.routePath} tripId={this.props.tripId}/>
+                <AddItineraryForm routePath={this.props.routePath} tripId={this.props.tripId}/>
                 )
               : (
                 <EditItineraryForm routePath={this.props.routePath} tripId={this.props.tripId} itineraryId={this.props.itineraryId}/>
