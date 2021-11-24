@@ -32,6 +32,11 @@ Try the application live [here](https://wanderlist-project.herokuapp.com/).
 - User can add notes to itineraries.
 - User can view itineraries on a map.
 
+## Stretch Features
+
+- User can get directions to place.
+- User can view weather.
+
 ## Preview
 
 
