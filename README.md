@@ -19,7 +19,7 @@ I built this project because I am a planner and love to travel. I always loosely
 
 ## Live Demo
 
-Try the application live at [https://wanderlist-project.herokuapp.com/](https://wanderlist-project.herokuapp.com/)
+Try the application live [here](https://wanderlist-project.herokuapp.com/)
 
 ## Features
 
