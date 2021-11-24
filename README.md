@@ -19,18 +19,22 @@ I built this project because I am a planner and love to travel. I always loosely
 
 ## Live Demo
 
-Try the application live at [https://student-grade-table.lfz.com](https://student-grade-table.lfz.com)
+Try the application live at [https://wanderlist-project.herokuapp.com/](https://wanderlist-project.herokuapp.com/)
 
 ## Features
 
-- Teachers can view a list of recorded grades.
-- Teachers can view the average grade.
-- Teachers can add a grade to the table.
-- Teachers can delete a grade from the table.
+- User can set the length of trip.
+- User can view trips.
+- User can view itinerary.
+- User can add itineraries.
+- User can view itinerary details.
+- User can edit itineraries.
+- User can add notes to itineraries.
+- User can view itineraries on a map.
 
 ## Preview
 
-![SGT React](assets/sgt-react.gif)
+
 
 ## Development
 
