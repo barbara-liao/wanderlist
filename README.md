@@ -49,7 +49,7 @@ Try the application live at [https://wanderlist-project.herokuapp.com/](https://
 
     ```shell
     git clone https://github.com/barbara-liao/wanderlist
-    cd sgt-react
+    cd wanderlist
     ```
 
 1. Install all dependencies with NPM.
