@@ -39,6 +39,7 @@ Try the application live [here](https://wanderlist-project.herokuapp.com/).
 
 ## Preview
 
+![wanderlist demo](https://user-images.githubusercontent.com/87685216/143378533-37e2b47b-43b6-42f1-bca2-afa01eaf7b3e.gif)
 
 
 ## Development
