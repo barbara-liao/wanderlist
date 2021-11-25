@@ -63,11 +63,23 @@ Try the application live [here](https://wanderlist-project.herokuapp.com/).
     ```shell
     npm install
     ```
-    
+
+1. Make a copy of the `.env.example` file.
+
+    ```shell
+    cp .env.example .env
+    ```    
+
 1. Start postgreSQL.
 
     ```shell
     sudo service postgresql start
+    ```
+    
+1. Create a new database.
+
+    ```shell
+    createdb wanderlist
     ```
 
 1. Import the example database to postgreSQL.
