@@ -48,6 +48,7 @@ Try the application live [here](https://wanderlist-project.herokuapp.com/).
 
 - Node.js 10 or higher
 - NPM 6 or higher
+- Postgres
 
 ### Getting Started
 
