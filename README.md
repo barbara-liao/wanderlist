@@ -89,7 +89,7 @@ Try the application live [here](https://wanderlist-project.herokuapp.com/).
     npm run db:import
     ```
 
-1. Start the database.
+1. Start the database (optional - if pgweb is installed)
 
     ```shell
     pgweb --db=wanderlist
