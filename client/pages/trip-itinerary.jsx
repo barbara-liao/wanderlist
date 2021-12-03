@@ -7,13 +7,13 @@ export default class TripItinerary extends React.Component {
   constructor(props, context) {
     super(props);
     this.state = {
+      action: '',
       weather: null,
       trip: null,
       itineraries: null,
       itemViewed: null,
       itemSelectedId: null,
       itemSelected: null,
-      action: '',
       tripId: this.props.tripId,
       loading: false,
       error: false
@@ -60,7 +60,23 @@ export default class TripItinerary extends React.Component {
       if (id === 'edit') {
         const id = event.target.id;
         this.setState({ action: id });
-
+      } else if (event.target.text === 'Remove') {
+        const itinId = Number(event.target.id);
+        const index = this.state.itineraries.findIndex(itinerary => itinerary.itineraryId === itinId);
+        const req = {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': window.localStorage.getItem('user-jwt')
+          }
+        };
+        fetch(`/api/itinerary/${itinId}`, req)
+          .then(result => {
+            const newItin = [...this.state.itineraries];
+            newItin.splice(index, 1, result);
+            this.setState({ itineraries: newItin });
+          })
+          .catch(err => console.error(err));
       }
 
       if (this.state.itemViewed === Number(id)) {
@@ -68,7 +84,7 @@ export default class TripItinerary extends React.Component {
           itemViewed: null,
           itemSelectedId: null
         });
-      } else {
+      } else if (this.state.itemViewed !== Number(id) && event.target.text !== 'Remove') {
         this.setState({
           itemViewed: Number(id),
           itemSelectedId: null

@@ -71,7 +71,11 @@ class Itinerary extends React.Component {
                  className="itinerary-margin itinerary-font modal-padding hover color-black">
                    Edit
               </a>
-                <a id="remove" className="itinerary-margin itinerary-font modal-padding hover color-black">Remove</a>
+                <a onClick={this.props.onClick}
+                id={itineraryId}
+                className="itinerary-margin itinerary-font modal-padding hover color-black">
+                  Remove
+                </a>
               </div>
             </div>
           </div>

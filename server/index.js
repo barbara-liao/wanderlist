@@ -271,7 +271,8 @@ app.delete('/api/itinerary/:itineraryId', authorizationMiddleware, (req, res, ne
     delete from "itinerary"
           where "itineraryId" = $1
             and "userId" = $2
-          returning *`;
+          returning *
+          `;
   const params = [itineraryId, userId];
 
   db.query(sql, params)
