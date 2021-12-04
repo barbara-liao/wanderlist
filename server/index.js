@@ -278,7 +278,7 @@ app.delete('/api/itinerary/:itineraryId', authorizationMiddleware, (req, res, ne
   db.query(sql, params)
     .then(result => {
       const itinerary = result.rows[0];
-      res.status(201).json(itinerary);
+      res.status(200).json(itinerary);
     })
     .catch(err => next(err));
 });
