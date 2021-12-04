@@ -282,6 +282,10 @@ hr {
   color: white;
 }
 
+.sign-in-width {
+  width: 24rem;
+}
+
 .hover:hover {
   background-color: #c0c0c0;
 }

@@ -54,7 +54,7 @@ export default class AuthForm extends React.Component {
             }
           </h2>
         </div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className="sign-in-width">
           <div className="flex justify-center align-center flex-column">
             <div>
               <input
@@ -110,6 +110,15 @@ export default class AuthForm extends React.Component {
                   }
                 </a>
               </p>
+            </div>
+            <hr></hr>
+            <div>
+              <button
+              id="demo"
+              type="submit"
+              className="register-sign-in-button poppins title-margin">
+                Demo Sign In
+              </button>
             </div>
           </div>
         </form>
