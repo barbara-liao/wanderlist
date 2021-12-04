@@ -41,6 +41,29 @@ export default class AuthForm extends React.Component {
     form.reset();
   }
 
+  handleDemo(event) {
+    event.preventDefault();
+    const demoSignIn = {
+      username: 'guest',
+      password: 'guest'
+    };
+    const req = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(demoSignIn)
+    };
+    fetch('/api/auth/sign-in', req)
+      .then(res => res.json())
+      .then(result => {
+        if (result.user && result.token) {
+          this.props.onSignIn(result);
+        }
+      })
+      .catch(err => console.error(err));
+  }
+
   render() {
     const { action } = this.props;
     return (
