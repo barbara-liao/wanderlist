@@ -63,7 +63,6 @@ export default class AuthForm extends React.Component {
                 type="text"
                 name="username"
                 placeholder="Username"
-                defaultValue="guest"
                 onChange={this.handleChange}
                 className="initiate-input poppins">
               </input>
@@ -74,7 +73,6 @@ export default class AuthForm extends React.Component {
                 id="password"
                 type="password"
                 name="password"
-                defaultValue="guest"
                 placeholder="Password"
                 onChange={this.handleChange}
                 className="initiate-input initiate-margin poppins">

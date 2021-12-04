@@ -263,6 +263,26 @@ app.patch('/api/itinerary', authorizationMiddleware, (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.delete('/api/itinerary/:itineraryId', authorizationMiddleware, (req, res, next) => {
+  const { userId } = req.user;
+  const itineraryId = parseInt(req.params.itineraryId, 10);
+  if (!itineraryId) { throw new ClientError(400, `cannot find trip with itineraryId ${itineraryId}`); }
+  const sql = `
+    delete from "itinerary"
+          where "itineraryId" = $1
+            and "userId" = $2
+          returning *
+          `;
+  const params = [itineraryId, userId];
+
+  db.query(sql, params)
+    .then(result => {
+      const itinerary = result.rows[0];
+      res.status(200).json(itinerary);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
