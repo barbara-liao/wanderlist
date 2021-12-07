@@ -9,6 +9,7 @@ export default class AuthForm extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   handleChange(event) {
@@ -77,7 +78,7 @@ export default class AuthForm extends React.Component {
             }
           </h2>
         </div>
-        <form onSubmit={this.handleSubmit} className="sign-in-width">
+        <form onSubmit={this.handleSubmit}>
           <div className="flex justify-center align-center flex-column">
             <div>
               <input
@@ -134,17 +135,18 @@ export default class AuthForm extends React.Component {
                 </a>
               </p>
             </div>
-            <hr></hr>
-            <div>
-              <button
-              id="demo"
-              type="submit"
-              className="register-sign-in-button poppins title-margin">
-                Demo Sign In
-              </button>
-            </div>
           </div>
         </form>
+          <hr></hr>
+          <div className="flex justify-center">
+            <button
+            onClick={this.handleDemo}
+            id="demo"
+            type="submit"
+            className="register-sign-in-button poppins title-margin">
+              Demo Sign In
+            </button>
+          </div>
       </div>
     );
   }
