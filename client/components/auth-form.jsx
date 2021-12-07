@@ -9,6 +9,7 @@ export default class AuthForm extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   handleChange(event) {
@@ -39,6 +40,29 @@ export default class AuthForm extends React.Component {
       .catch(err => console.error(err));
 
     form.reset();
+  }
+
+  handleDemo(event) {
+    event.preventDefault();
+    const demoSignIn = {
+      username: 'guest',
+      password: 'guest'
+    };
+    const req = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(demoSignIn)
+    };
+    fetch('/api/auth/sign-in', req)
+      .then(res => res.json())
+      .then(result => {
+        if (result.user && result.token) {
+          this.props.onSignIn(result);
+        }
+      })
+      .catch(err => console.error(err));
   }
 
   render() {
@@ -113,6 +137,16 @@ export default class AuthForm extends React.Component {
             </div>
           </div>
         </form>
+          <hr></hr>
+          <div className="flex justify-center">
+            <button
+            onClick={this.handleDemo}
+            id="demo"
+            type="submit"
+            className="register-sign-in-button poppins title-margin">
+              Demo Sign In
+            </button>
+          </div>
       </div>
     );
   }
