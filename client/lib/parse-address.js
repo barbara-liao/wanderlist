@@ -6,6 +6,7 @@ export default function parseAddress(address) {
     .replaceAll('<span class="region">', '')
     .replaceAll('<span class="postal-code">', '')
     .replaceAll('<span class="country-name">', '')
+    .replaceAll('<span class="extended-address">', '')
     .replaceAll('&#39;', "'")
     .replaceAll('</span>', '');
   return parsedAddress;
