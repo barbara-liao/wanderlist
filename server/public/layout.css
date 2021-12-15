@@ -348,11 +348,11 @@
   }
 
   .itinerary-input {
-    width: 20rem;
+    width: 100%;
   }
 
   .initiate-input {
-    width: 22rem;
+    width: 100%;
     height: 2.4rem;
     border-radius: 5px;
     border: 1px solid gray;
