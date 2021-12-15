@@ -306,6 +306,10 @@
     width: 93%;
   }
 
+  .full-width {
+    width: 100%;
+  }
+
   .icon-modal {
     height: 595px;
     width: 345px;

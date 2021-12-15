@@ -61,7 +61,7 @@ hr {
 }
 
 .itinerary-input {
-  width: 25rem;
+  width: 100%;
   height: 1.8rem;
   border-radius: 3px;
   border: 1px solid gray;
