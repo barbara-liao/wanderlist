@@ -21,10 +21,14 @@ export default class ItineraryPage extends React.Component {
           {
             this.props.routePath === 'add-trip'
               ? (
-                <AddItineraryForm routePath={this.props.routePath} tripId={this.props.tripId}/>
+                <div className="full-width">
+                  <AddItineraryForm routePath={this.props.routePath} tripId={this.props.tripId} />
+                </div>
                 )
               : (
-                <EditItineraryForm routePath={this.props.routePath} tripId={this.props.tripId} itineraryId={this.props.itineraryId}/>
+                <div className="full-width">
+                  <EditItineraryForm routePath={this.props.routePath} tripId={this.props.tripId} itineraryId={this.props.itineraryId}/>
+                </div>
                 )
           }
         </div>
