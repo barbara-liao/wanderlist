@@ -80,7 +80,7 @@ export default class AuthForm extends React.Component {
         </div>
         <form onSubmit={this.handleSubmit}>
           <div className="flex justify-center align-center flex-column">
-            <div>
+            <div className="full-width">
               <input
                 required
                 id="username"
@@ -91,7 +91,7 @@ export default class AuthForm extends React.Component {
                 className="initiate-input poppins">
               </input>
             </div>
-            <div>
+            <div className="full-width">
               <input
                 required
                 id="password"
