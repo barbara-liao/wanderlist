@@ -2,6 +2,7 @@ import React from 'react';
 import Autocomplete from './autocomplete';
 import { GoogleApiWrapper } from 'google-maps-react';
 import AppContext from '../lib/app-context';
+import { defaultDate } from '../lib/default-date';
 
 export class AddItineraryForm extends React.Component {
   constructor(props, context) {
@@ -10,6 +11,7 @@ export class AddItineraryForm extends React.Component {
       adrAddress: '',
       address: '',
       date: '',
+      endDate: defaultDate(props.tripDetail.endDate),
       endTime: '',
       geometry: '',
       hours: [],
@@ -18,6 +20,7 @@ export class AddItineraryForm extends React.Component {
       phoneNum: '',
       placeId: '',
       rating: null,
+      startDate: defaultDate(props.tripDetail.startDate),
       startTime: '',
       tripId: props.tripId,
       website: ''
@@ -103,6 +106,7 @@ export class AddItineraryForm extends React.Component {
   }
 
   render() {
+    const { endDate, startDate } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="row flex-column">
@@ -120,6 +124,8 @@ export class AddItineraryForm extends React.Component {
             id="date"
             type="date"
             name="date"
+            min={startDate}
+            max={endDate}
             onChange={this.handleChange}
             className="itinerary-input poppins">
           </input>
