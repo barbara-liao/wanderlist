@@ -11,7 +11,9 @@ export default class EditItineraryForm extends React.Component {
       itemSelected: null,
       itemSelectedId: null,
       itineraryId: props.itineraryId,
-      startTime: null
+      startTime: null,
+      startDate: defaultDate(props.tripDetail.startDate),
+      endDate: defaultDate(props.tripDetail.endDate)
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -68,6 +70,7 @@ export default class EditItineraryForm extends React.Component {
 
   render() {
     if (!this.state.itemSelected) { return null; }
+    const { startDate, endDate } = this.state;
     const { name, date, timeStart, timeEnd } = this.state.itemSelected;
     const formattedDate = defaultDate(date);
     const formattedStartTime = defaultTime(timeStart);
@@ -89,6 +92,8 @@ export default class EditItineraryForm extends React.Component {
               id="date"
               type="date"
               name="date"
+              min={startDate}
+              max={endDate}
               defaultValue={formattedDate}
               onChange={this.handleChange}
               className="itinerary-input poppins">
