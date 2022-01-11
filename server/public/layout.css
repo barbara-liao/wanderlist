@@ -120,6 +120,11 @@
   flex-basis: 50%;
 }
 
+.website-format {
+  width: 85%;
+  word-wrap: break-word;
+}
+
 .margin-auto {
   margin: auto;
 }
@@ -164,6 +169,10 @@
 
 .icon-margin {
   margin: 0 10px 0 0;
+}
+
+.map-icon-margin {
+  margin: 0 13px 0 1px;
 }
 
 .rating-margin {

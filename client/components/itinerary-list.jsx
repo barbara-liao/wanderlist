@@ -1,5 +1,6 @@
 import React from 'react';
 import getRange from '../lib/get-range';
+import googleDirections from '../lib/google-directions';
 import parseAddress from '../lib/parse-address';
 import parseDate from '../lib/parse-date';
 import parseOperatingHours from '../lib/parse-operating-hours';
@@ -45,8 +46,8 @@ class Itinerary extends React.Component {
       <>
         <div className="row itinerary-card flex-column day-margin">
           <div onClick={this.props.onClick} className="row itinerary-header justify-space-between">
-            <a id="display" className="col-nine-tenth margin-auto">
-              <div id={itineraryId} className="flex flex-column justify-center padding-left">
+            <div id="display" className="col-nine-tenth margin-auto">
+              <a id={itineraryId} className="flex flex-column justify-center padding-left">
                 <div id={itineraryId} className="row">
                   <h4 id={itineraryId} className="itinerary-margin">{name}</h4>
                 </div>
@@ -54,10 +55,10 @@ class Itinerary extends React.Component {
                   <p id={itineraryId}className="itinerary-margin itinerary-font">{parseTime(timeStart)} - {parseTime(timeEnd)}</p>
                 </div>
                 <div id={itineraryId} className="row">
-                <p id={itineraryId} className="itinerary-margin itinerary-font">{parsedAddress}</p>
+                  <div id={itineraryId} className="itinerary-margin itinerary-font">{parsedAddress}</div>
                 </div>
-              </div>
-            </a>
+              </a>
+            </div>
             <div className="col-one-tenth flex justify-center align-center position-relative">
               <a id="edit-delete" onClick={this.props.onClick}>
                 <i id={itineraryId} className="fas fa-ellipsis-v ellipses-padding"></i>
@@ -114,11 +115,19 @@ class Itinerary extends React.Component {
                 )}
               </div>
             </div>
+            {parsedAddress && (
+              <div className="row title-margin">
+                <i className="fas fa-map-marker-alt icon-detail map-icon-margin"></i>
+                <div className="row">
+                  <a className="margin-none itinerary-font" href={googleDirections(parsedAddress)} target="_blank" rel="noreferrer">Directions</a>
+                </div>
+              </div>
+            )}
             { website && (
             <div className="row title-margin">
               <i className="fas fa-globe-americas icon-detail icon-margin"></i>
               <div className="row">
-                <a className="margin-none itinerary-font" href={website} target="_blank" rel="noreferrer">{website}</a>
+                  <a className="margin-none itinerary-font website-format" href={website} target="_blank" rel="noreferrer">{website}</a>
               </div>
             </div>
             )}
