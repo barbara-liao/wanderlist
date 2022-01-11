@@ -120,6 +120,11 @@
   flex-basis: 50%;
 }
 
+.website-format {
+  width: 85%;
+  word-wrap: break-word;
+}
+
 .margin-auto {
   margin: auto;
 }
