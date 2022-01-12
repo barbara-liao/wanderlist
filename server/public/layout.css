@@ -121,8 +121,12 @@
 }
 
 .website-format {
-  width: 85%;
+  width: 100%;
   word-wrap: break-word;
+}
+
+.website-width {
+  width: 90%;
 }
 
 .margin-auto {

@@ -126,7 +126,7 @@ class Itinerary extends React.Component {
             { website && (
             <div className="row title-margin">
               <i className="fas fa-globe-americas icon-detail icon-margin"></i>
-              <div className="row">
+              <div className="row website-width">
                   <a className="margin-none itinerary-font website-format" href={website} target="_blank" rel="noreferrer">{website}</a>
               </div>
             </div>
