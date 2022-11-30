@@ -2,7 +2,7 @@
 
 A web application for vacationers who want to plan their itinerary.
 
-I built this project because I am a planner and love to travel. I always loosely plan out my trips and like to have options for places to go. I wanted to see my itineraries laid out day by day and to be able to view all the locations on a map, that way I can plan each day based on locations and what would make more sense. I hope this app can assist others in planning for their trips, as it did mine.
+I built this project because I am a planner and love to travel. I always loosely plan out my trips and like to have options for places to go. I wanted to see my itineraries laid out day by day and to be able to view all the locations on a map - that way I can plan each day based on locations and what would make more sense. I hope this app can assist others in planning for their trips, as it did mine.
 
 ## Technologies Used
 
