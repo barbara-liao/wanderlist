@@ -102,6 +102,10 @@ hr {
   background-color: #679ea0;
 }
 
+.icon-button:active {
+  background-color: #76b3b5;
+}
+
 .plan-button {
   background-color: #e3913f;
   color: white;
@@ -114,6 +118,10 @@ hr {
 
 .plan-button:hover {
   background-color: #d3873b;
+}
+
+.plan-button:active {
+  background-color: #e3913f;
 }
 
 .register-sign-in-button {
@@ -130,6 +138,10 @@ hr {
   background-color: #d3873b;
 }
 
+.register-sign-in-button:active {
+  background-color: #e3913f;
+}
+
 .new-trip-button {
   background-color: #e3913f;
   color: white;
@@ -142,6 +154,10 @@ hr {
 
 .new-trip-button:hover {
   background-color: #d3873b;
+}
+
+.new-trip-button:active {
+  background-color: #e3913f;
 }
 
 .add-save-button {
@@ -158,6 +174,10 @@ hr {
   background-color: #d3873b;
 }
 
+.add-save-button:active {
+  background-color: #e3913f;
+}
+
 .cancel-button {
   background-color: #e3913f;
   color: white;
@@ -172,6 +192,10 @@ hr {
   background-color: #d3873b;
 }
 
+.cancel-button:active {
+  background-color: #e3913f;
+}
+
 .add-button {
   background-color: #e3913f;
   color: white;
@@ -182,6 +206,10 @@ hr {
 
 .add-button:hover {
   background-color: #d3873b;
+}
+
+.add-button:active {
+  background-color: #e3913f;
 }
 
 .maps-button {
@@ -195,6 +223,10 @@ hr {
 
 .maps-button:hover {
   background-color: #d3873b;
+}
+
+.maps-button:active {
+  background-color: #e3913f;
 }
 
 .icon-modal {
