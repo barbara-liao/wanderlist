@@ -48,6 +48,20 @@
   margin: auto;
 }
 
+.icon-modal {
+  height: 415px;
+  width: 500px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 25px;
+}
+
 .itinerary-card {
   width: 100%;
   margin: auto;
@@ -324,9 +338,10 @@
   }
 
   .icon-modal {
-    height: 595px;
-    width: 345px;
-    padding: 20px 10px;
+    width: auto;
+    margin: 15px;
+    top: 14vh;
+    overflow-y: scroll;
   }
 
   .icon {
