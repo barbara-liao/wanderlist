@@ -229,20 +229,6 @@ hr {
   background-color: #e3913f;
 }
 
-.icon-modal {
-  height: 415px;
-  width: 500px;
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 4px;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  padding: 25px;
-}
-
 .edit-delete-modal {
   height: 3.4rem;
   width: 5rem;
